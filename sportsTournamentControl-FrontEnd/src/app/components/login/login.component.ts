@@ -30,13 +30,19 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('identity', JSON.stringify(res.already));
         localStorage.setItem('token', res.token);
         
-        Swal.fire(
-          'token' ,
-          'Welcome to Soccer Control Tourment!',
-          'success'
-        )
+        Swal.fire({
+          title: res.message,
+          html:'Welcome <b>'+ res.already.username+'</b>',
+          confirmButtonColor: '#28B463'
+        })
       },
-      error: (err)=> alert(err.error.message || err.error)
+      error: (err: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
     })
   }
 
