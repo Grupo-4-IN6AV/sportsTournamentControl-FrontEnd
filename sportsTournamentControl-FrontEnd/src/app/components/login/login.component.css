@@ -1,0 +1,70 @@
+:root {
+    --dark: #ffffff;
+    --dark-x: #ffffff; 
+    --light: #ffffff;
+  }
+  
+  
+  .text-light { color: #ffffff !important; }
+  .bg-dark { background-color: #16191C !important; }
+  .bg-dark-x { background-color: #1E2126; }
+  
+  .body {
+    font-family: 'Spartan', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+  }
+  
+  .btn1 {
+    min-height: 3.125rem;
+    font-weight: 600;
+    background-color: #369E62;
+    color: #FFFFFF;
+  }
+  
+  .btn1:hover
+  {
+    background-color: #3FB471;
+    color: #FFFFFF;
+  }
+  
+  .btn {
+    min-height: 3.125rem;
+    font-weight: 600;
+  }
+  
+  .form-control {
+    min-height: 3.125rem;
+    line-height: initial;
+  }
+  .form-control:focus {
+    background-color: #1E2126;
+    outline: none;
+  }
+  
+  .img-1 {
+    background-image: url('../../../assets/img/img-1.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .img-2 {
+    background-image: url('../../../assets/img/img-2.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .etiqueta
+  {
+    color: #FFFFFF;
+  }
+  
+  .etiqueta:hover
+  {
+    color: #369E62;
+  }
+  
+  .letras
+  {
+    color: gainsboro;
+  }
