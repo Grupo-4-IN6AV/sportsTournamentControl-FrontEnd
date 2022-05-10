@@ -4,12 +4,14 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { Error404Component } from './components/error404/error404.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
  /*1 solo uso */ {path: '', component: LandingPageComponent}, //RUTA POR DEFAULT | VISTA PRINCIPAL
   {path: 'landingPage', component: LandingPageComponent}, //RUTA NORMAL 1+
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent}, //RUTA NORMAL
+  {path: 'register', component: RegisterComponent},
   {path: '**', component: Error404Component}
   
 ];
