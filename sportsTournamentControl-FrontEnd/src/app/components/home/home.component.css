@@ -3,6 +3,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	viewport: 100vh;
 }
 
 a {
@@ -13,10 +14,10 @@ li {
 	list-style: none;
 }
 
-
-
-
-
+body
+{
+	background: #18191A;
+}
 
 /* SIDEBAR */
 #sidebar {
