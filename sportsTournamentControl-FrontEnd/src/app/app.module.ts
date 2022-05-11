@@ -10,6 +10,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { Error404Component } from './components/error404/error404.component';
+import { UserAdminComponent } from './components/admin/user-admin/user-admin.component';
+import { TournamentsAdminComponent } from './components/admin/tournaments-admin/tournaments-admin.component';
+import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.component';
 
 @NgModule({
   declarations: 
@@ -19,7 +22,10 @@ import { Error404Component } from './components/error404/error404.component';
     LoginComponent,
     RegisterComponent,
     LandingPageComponent,
-    Error404Component
+    Error404Component,
+    UserAdminComponent,
+    TournamentsAdminComponent,
+    TeamsAdminComponent
   ],
   imports: [
     BrowserModule,

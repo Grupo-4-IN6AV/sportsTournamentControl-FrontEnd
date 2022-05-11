@@ -18,7 +18,7 @@ export class UserGuard implements CanActivate {
        this.userRest.getIdentity().role === 'ADMIN'){
       return true; //next()
     }else{
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('login');
       return false;
     }
   }

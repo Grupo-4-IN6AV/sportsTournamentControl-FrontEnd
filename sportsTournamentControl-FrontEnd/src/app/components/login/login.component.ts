@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   login(){
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
         
         Swal.fire({
+          icon:'success',
           title: res.message,
           html:'Welcome <b>'+ res.already.username+'</b>',
           confirmButtonColor: '#28B463'

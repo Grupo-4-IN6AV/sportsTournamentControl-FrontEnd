@@ -6,7 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserRestService {
-  httpOptions = new HttpHeaders().set('Content-Type', 'application/json');
+
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
 
   constructor(
     private http: HttpClient
