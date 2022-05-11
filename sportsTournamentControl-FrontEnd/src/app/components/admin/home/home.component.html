@@ -9,8 +9,6 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
     <link rel="stylesheet" href="home.component.css">
-
-    <title>AdminHub</title>
 </head>
 
 <body>
@@ -56,7 +54,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="logout">
+                <a  (click)="logOut()" class="logout" routerLink="/login">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
@@ -72,7 +70,6 @@
         <!-- NAVBAR -->
         <nav>
             <i class='bx bx-menu'></i>
-            <a href="#" class="nav-link">Categories</a>
             <form action="#">
                 <div class="form-input">
                     <input type="search" placeholder="Search...">
@@ -86,38 +83,69 @@
         <!-- NAVBAR -->
 
         <!-- VALIDAR LO QUE EL USUARIO ME MANDE -->
-        <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>Dashboard</h1>
+        <main *ngIf="notShow">
+            <div >
+                <div class="head-title">
+                    <div class="left">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <a href="#" class="btn-download">
+                        <i class='bx bxs-cloud-download'></i>
+                        <span class="text">Download PDF</span>
+                    </a>
                 </div>
-                <a href="#" class="btn-download">
-                    <i class='bx bxs-cloud-download'></i>
-                    <span class="text">Download PDF</span>
-                </a>
+
+                <ul class="box-info">
+                    <li (click)="userShow(); dontShowMain()">
+                        <i class='bx bxs-group'></i>
+                        <span class="text">
+                            <h3>Users</h3>
+                        </span>
+                    </li>
+                    <li (click)="tournamentsShow(); dontShowMain()">
+                        <i class='bx bxs-trophy'></i>
+                        <span class="text">
+                            <h3>Tournaments</h3>
+                        </span>
+                    </li>
+                    <li (click)="teamsShow(); dontShowMain()">
+                        <i class='bx bxs-shield'></i>
+                        <span class="text">
+                            <h3>Teams</h3>
+                        </span>
+                    </li>
+                </ul>
             </div>
+        </main>
 
-            <ul class="box-info">
-                <li>
-                    <i class='bx bxs-group'></i>
-                    <span class="text">
-                        <h3>Users</h3>
-                    </span>
-                </li>
-                <li>
-                    <i class='bx bxs-trophy'></i>
-                    <span class="text">
-                        <h3>Tournaments</h3>
-                    </span>
-                </li>
-                <li>
-                    <i class='bx bxs-shield'></i>
-                    <span class="text">
-                        <h3>Teams</h3>
-                    </span>
-                </li>
-            </ul>
+        <!-- CONTROL USUARIOS -->
+        <main  *ngIf="isShownUser" >
+            <div class="left binding">
+                <h1>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    Control Users
+                </h1>
+            </div>
+            <hr>
+            <app-user-admin></app-user-admin>
+        </main>
 
+        <!--CONTROL DE TORNEOS-->
+        <main  *ngIf="isShownTournaments" >
+            <div class="left binding">
+                <h1>Control Tournaments</h1>
+            </div>
+            <hr>
+            <app-tournaments-admin></app-tournaments-admin>
+        </main>
+
+        <!--CONTROL DE EQUIPOS-->
+        <main  *ngIf="isShownTeams" >
+            <div class="left binding">
+                <h1>Control Teams</h1>
+            </div>
+            <hr>
+            <app-teams-admin></app-teams-admin>
         </main>
         <!-- MAIN -->
     </section>

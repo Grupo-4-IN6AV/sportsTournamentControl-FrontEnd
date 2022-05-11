@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,11 +11,16 @@ export class HomeComponent implements OnInit
 {
   token : any;
   role : any;
+  isShownUser: boolean = false;
+  isShownTournaments: boolean = false ;
+  isShownTeams: boolean = false ;
+  notShow: boolean = true ;
 
   constructor
   (
     private _CargarScripts:CargarScriptsService,
-    private userRest : UserRestService
+    private userRest : UserRestService,
+    private router: Router
   )
   {
     _CargarScripts.Carga(["home-component"])
@@ -25,6 +30,37 @@ export class HomeComponent implements OnInit
   {
     this.token = this.userRest.getToken();
     this.role = this.userRest.getIdentity().role;
+  }
+
+  userShow()
+  {
+    this.isShownUser = ! this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments;
+    this.isShownTeams == this.isShownTeams
+  }
+
+  dontShowMain()
+  {
+    this.notShow = ! this.notShow;
+  }
+
+  tournamentsShow()
+  {
+    this.isShownTournaments = ! this.isShownTournaments;
+    this.isShownUser == this.isShownUser;
+    this.isShownTeams == this.isShownTeams
+  }
+
+  teamsShow()
+  {
+    this.isShownTeams = ! this.isShownTeams;
+    this.isShownUser == this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments
+  }
+
+  logOut()
+  {
+    localStorage.clear(); 
   }
 
 }
