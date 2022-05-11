@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <!-- My CSS -->
-    <link rel="stylesheet" href="home.component.css">
-</head>
-
-<body>
-
-
+<body id="body">
+    
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
@@ -24,7 +10,7 @@
             <li class="active">
                 <a href="#">
                     <i class='bx bxs-dashboard'></i>
-                    <span class="text">Dashboard</span>
+                    <span class="text">PEN</span>
                 </a>
             </li>
             <li>
@@ -54,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a  (click)="logOut()" class="logout" routerLink="/login">
+                <a (click)="logOut()" class="logout" routerLink="/login">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
@@ -70,24 +56,21 @@
         <!-- NAVBAR -->
         <nav>
             <i class='bx bx-menu'></i>
-            <form action="#">
-                <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                </div>
-            </form>
+
             <a href="#" class="profile">
-                <img src="img/people.png">
             </a>
         </nav>
         <!-- NAVBAR -->
 
         <!-- VALIDAR LO QUE EL USUARIO ME MANDE -->
         <main *ngIf="notShow">
-            <div >
+            <div>
                 <div class="head-title">
                     <div class="left">
-                        <h1>Dashboard</h1>
+                        <h1>
+                            <i class='bx bxs-dashboard'></i>
+                            Control Administrator</h1>
+                        <hr>
                     </div>
                     <a href="#" class="btn-download">
                         <i class='bx bxs-cloud-download'></i>
@@ -119,8 +102,8 @@
         </main>
 
         <!-- CONTROL USUARIOS -->
-        <main  *ngIf="isShownUser" >
-            <div class="left binding">
+        <main *ngIf="isShownUser">
+            <div class="left binding color">
                 <h1>
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
                     Control Users
@@ -131,16 +114,16 @@
         </main>
 
         <!--CONTROL DE TORNEOS-->
-        <main  *ngIf="isShownTournaments" >
+        <main *ngIf="isShownTournaments">
             <div class="left binding">
                 <h1>Control Tournaments</h1>
             </div>
             <hr>
-            <app-tournaments-admin></app-tournaments-admin>
+            <app-tournaments-admin class="color"></app-tournaments-admin>
         </main>
 
         <!--CONTROL DE EQUIPOS-->
-        <main  *ngIf="isShownTeams" >
+        <main *ngIf="isShownTeams">
             <div class="left binding">
                 <h1>Control Teams</h1>
             </div>
@@ -150,9 +133,4 @@
         <!-- MAIN -->
     </section>
     <!-- CONTENT -->
-
-
-    <script src="script.js"></script>
 </body>
-
-</html>

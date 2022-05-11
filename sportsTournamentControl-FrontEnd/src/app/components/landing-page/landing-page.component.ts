@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 @Component({
   selector: 'landingPage',
   templateUrl: './landing-page.component.html',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor
+  (
+    private _CargarScripts:CargarScriptsService,
+  ) 
+  {
+    _CargarScripts.Carga(["main"])
+  }
 
   ngOnInit(): void {
   }

@@ -32,7 +32,7 @@ export class UserAdminService {
 
   getUser(id : string)
   {
-    return this.http.get(environment.baseUrl + 'user/getUser' + id, {headers : this.httpOptions});
+    return this.http.get(environment.baseUrl + 'user/getUser/' + id, {headers : this.httpOptions});
   }
 
   deleteUser(id:string){

@@ -13,6 +13,7 @@ import { Error404Component } from './components/error404/error404.component';
 import { UserAdminComponent } from './components/admin/user-admin/user-admin.component';
 import { TournamentsAdminComponent } from './components/admin/tournaments-admin/tournaments-admin.component';
 import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.component';
+import { SearchUserPipe } from './pipes/search-user.pipe';
 
 @NgModule({
   declarations: 
@@ -25,7 +26,8 @@ import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.
     Error404Component,
     UserAdminComponent,
     TournamentsAdminComponent,
-    TeamsAdminComponent
+    TeamsAdminComponent,
+    SearchUserPipe,
   ],
   imports: [
     BrowserModule,

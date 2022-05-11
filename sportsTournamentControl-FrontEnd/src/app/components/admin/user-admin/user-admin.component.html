@@ -1,5 +1,12 @@
-<!-- DESPLIEGA EL BOTON -->
-<div class="text-center">
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div class="form-input mt-5">
+  <input [(ngModel)]="searchUser" placeholder="Search...">
+  <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+
+<!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
+<div class="text-center mt-2 mb-2">
   <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#addUser">
     <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</button>
 </div>
@@ -8,7 +15,7 @@
 <div>
   <div class="container">
     <div class="products-container">
-      <div *ngFor="let user of users" class="product" data-name="p-1">
+      <div *ngFor="let user of users | searchUserPipe:searchUser" class="product" data-name="p-1">
         <h5 class="card-title">{{ user.name +' '+user.surname }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{user.username}}</h6>
         <p class="card-text">{{ user.role }}</p>
@@ -16,35 +23,82 @@
           aria-controls="offcanvasExample">
           <i class="fa fa-pencil" aria-hidden="true"></i> Update
         </button>
-        <button (click)="deleteUser(user._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-        <button class="btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i> View</button>
+        <button (click)="deleteUser(user._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i>
+          Delete</button>
+        <button (click)="getUser(user._id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i> View</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- DESPLIEGA TODOS LOS USUARIOS EXISTENTES 
-<div class="row">
-  <div *ngFor="let user of users" class="card m-4 text-center" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{ user.name +' '+user.surname }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{user.username}}</h6>
-      <p class="card-text">{{ user.role }}</p>
-      <button class="btn btn-warning m-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-        aria-controls="offcanvasExample">
-        <i class="fa fa-pencil" aria-hidden="true"></i> Update
-      </button>
-      <button class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-      <button class="btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i> View</button>
+
+<!-- MODAL SHOW USER -->
+<div *ngIf="userView" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="contenedor">
+          <div class="contenedor-perfil">
+            <div class="descripcion">
+              <div class="count-container">
+
+                <div class="box">
+                  <h3>Name:</h3>
+                </div>
+
+                <div class="box">
+                  <p>{{userView.name}}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Username:</h3>
+                </div>
+
+                <div class="box">
+                  <p>{{userView.surname}}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Email:</h3>
+                </div>
+
+                <div class="box">
+                  <p>{{userView.email}}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Phone:</h3>
+                </div>
+
+                <div class="box">
+                  <p>{{userView.phone}}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Role:</h3>
+                </div>
+
+                <div class="box">
+                  <p>{{userView.role}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
-</div>-->
+</div>
 
 
 <!-- Modal Save User -->
 <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user-circle" aria-hidden="true"></i>

@@ -45,18 +45,31 @@ export class RegisterComponent implements OnInit
       {
         if (this.confirmPassword != this.user.password) 
         {
-          alert('Password do not Match');
+          Swal.fire({
+            icon:'error',
+            title: 'Password do not Match',
+            html:'Try Again',
+            confirmButtonColor: '#E74C3C'
+          })
         }
         else 
         {
-          alert('Password Match');
+          Swal.fire({
+            icon:'success',
+            title: 'Passwords Match',
+            confirmButtonColor: '#28B463'
+          })
         }
       }
       else
       {
-        alert('Set value in input password');
+        Swal.fire({
+          icon:'info',
+          title: 'Set value in input Password',
+          confirmButtonColor: '#0D6EFD'
+        })
       }
-    }, 1500);
+    }, 800);
   }
 
   register()

@@ -16,8 +16,6 @@
 text-align: center;
 }
 
-
-
 .container{
    max-width: 1200px;
    padding:3rem 2rem;
@@ -199,4 +197,126 @@ text-align: center;
       font-size: 50%;
    }
 
+}
+
+.form-input {
+	display: flex;
+	align-items: center;
+	height: 36px;
+}
+.form-input input {
+	flex-grow: 1;
+	padding: 0 16px;
+	height: 100%;
+	border: none;
+	background: #242526;
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 100%;
+	color: #eeeeee;
+}
+.form-input button {
+	width: 36px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #3C91E6;
+	color: #242526;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+
+hr
+{
+	color: grey
+}
+
+
+
+.contenedor
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    height: auto;
+    padding: 0 20px;
+    background-color: #18191A;
+    border-radius: 4px;
+}
+
+.contenedor-perfil
+{
+    display: flex;
+    width: 800px;
+    height: auto;
+    background-color: #18191A;
+    border-radius: 2px;
+}
+
+.descripcion
+{
+   text-align: center;
+   background-color: #18191A;
+}
+
+.encabezado, .descripcion
+{
+    padding: 20px;
+    text-align: center;
+}
+
+.descripcion
+{
+    position: relative;
+}
+
+.descripcion .count-container 
+{
+    -webkit-box-flex: 1;
+    -ms-flex: 1 7 42rem;
+    flex: 1 1 42rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+  
+.descripcion .count-container .box 
+{
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 15rem;
+    flex: 1 1 15rem;
+    padding: auto 0.5rem;
+    border-radius: .5rem;
+    background: #242526;
+}
+
+.descripcion .count-container .box h3 
+{
+   text-align: center;
+    font-size: 1.2rem;
+    color: #eeeeee;
+}
+  
+.descripcion .count-container .box p 
+{
+    font-size: 1.2rem;
+    color: #eeeeee;
+}
+
+.box p
+{
+   padding-top: 15px;
+}
+
+.box h3
+{
+   padding-top: 15px;
 }
