@@ -25,10 +25,11 @@
           <input [(ngModel)]="userUpdate.phone" name="phone" autocomplete="off" type="text" class="input">
        </div> 
        <div class="mt-5 modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-          <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
-            aria-hidden="true"></i> Update User
+        <button (click)="deleteAccount()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <i class="fa fa-trash-alt" aria-hidden="true"></i> Delete Account
+        </button>
+        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+          <i class="fa fa-refresh" aria-hidden="true"></i> Update Account
         </button>
       </div>
     </form>
