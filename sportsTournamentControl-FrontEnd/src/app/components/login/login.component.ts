@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       if(verificarAdmin == 'ADMIN')
          {this.router.navigate(['/admin/home']);}
       else
-      {this.router.navigate(['/**'])}
+      {this.router.navigate(['/client/home'])}
             
       },
       error: (err: any) => {

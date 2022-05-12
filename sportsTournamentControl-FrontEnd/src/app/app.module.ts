@@ -14,6 +14,7 @@ import { UserAdminComponent } from './components/admin/user-admin/user-admin.com
 import { TournamentsAdminComponent } from './components/admin/tournaments-admin/tournaments-admin.component';
 import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.component';
 import { SearchUserPipe } from './pipes/search-user.pipe';
+import { HomeClientComponent } from './components/client/home-client/home-client.component';
 
 @NgModule({
   declarations: 
@@ -28,6 +29,7 @@ import { SearchUserPipe } from './pipes/search-user.pipe';
     TournamentsAdminComponent,
     TeamsAdminComponent,
     SearchUserPipe,
+    HomeClientComponent,
   ],
   imports: [
     BrowserModule,
