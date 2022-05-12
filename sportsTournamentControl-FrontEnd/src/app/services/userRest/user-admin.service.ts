@@ -49,4 +49,9 @@ export class UserAdminService {
   {
     return this.http.put(environment.baseUrl + 'user/update/' + id, params, {headers: this.httpOptions});
   }
+
+  deleteAccount(id:string)
+  {
+    return this.http.delete(environment.baseUrl + 'user/delete/' + id, {headers: this.httpOptions});
+  }
 }

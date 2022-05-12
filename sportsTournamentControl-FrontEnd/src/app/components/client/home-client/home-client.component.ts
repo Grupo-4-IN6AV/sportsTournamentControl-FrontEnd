@@ -12,14 +12,17 @@ export class HomeClientComponent implements OnInit
 {
   token : any;
   role : any;
+  userUpdate: any;
   isShownUser: boolean = false;
   isShownTournaments: boolean = false ;
-  isShownTeams: boolean = false ;
+  isShownTeams: boolean = false;
+  isShownSettings: boolean = false;
   notShow: boolean = true ;
   disableUser: boolean = false;
   disableTournament: boolean = false;
   disableTeam: boolean = false;
   disablePanel : boolean = false;
+  disableSettings: boolean = false;
 
   constructor
   (
@@ -42,6 +45,7 @@ export class HomeClientComponent implements OnInit
     this.isShownUser =! this.isShownUser;
     this.isShownTournaments == this.isShownTournaments;
     this.isShownTeams == this.isShownTeams;
+    this.isShownSettings == this.isShownSettings;
   }
 
   dontShowMain()
@@ -54,6 +58,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments = ! this.isShownTournaments;
     this.isShownUser == this.isShownUser;
     this.isShownTeams == this.isShownTeams
+    this.isShownSettings == this.isShownSettings;
   }
 
   teamsShow()
@@ -61,6 +66,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = ! this.isShownTeams;
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
+    this.isShownSettings == this.isShownSettings;
   }
 
   logOut()
@@ -78,6 +84,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments = false;
     this.isShownTeams = false;
     this.notShow = false;
+    this.isShownSettings = false;
   }
 
   isDisableTournament()
@@ -90,6 +97,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments = true;
     this.isShownTeams = false;
     this.notShow = false;
+    this.isShownSettings = false;
   }
 
   isDisableTeam()
@@ -102,6 +110,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments = false;
     this.isShownTeams = true;
     this.notShow = false;
+    this.isShownSettings = false;
   }
 
   isDisablePanel()
@@ -114,6 +123,20 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments = false;
     this.isShownTeams = false;
     this.notShow = true;
+    this.isShownSettings = false;
+  }
+
+  isDisableSettings()
+  {
+    this.disablePanel = false;
+    this.disableUser = false;
+    this.disableTournament = false;
+    this.disableTeam = false;
+    this.isShownUser = false;
+    this.isShownTournaments = false;
+    this.isShownTeams = false;
+    this.notShow = false;
+    this.isShownSettings = true;
   }
 
 }

@@ -28,7 +28,7 @@
         </ul>
         <ul class="side-menu">
             <li>
-                <button href="#">
+                <button [disabled]="disableSettings" (click)="isDisableSettings();">
                     <i class='bx bxs-cog'></i>
                     <span class="text">Settings</span>
                 </button>
@@ -104,6 +104,16 @@
             </div>
             <hr>
             <app-teams-admin></app-teams-admin>
+        </main>
+
+        <!--SETTINGS PROFILES-->
+        <main *ngIf="isShownSettings">
+            <div class="left binding">
+                <h1><i class="fa fa-cogs" aria-hidden="true"></i>
+                     Profile Settings</h1>
+            </div>
+            <hr>
+            <app-user-client></app-user-client>
         </main>
         <!-- MAIN -->
     </section>
