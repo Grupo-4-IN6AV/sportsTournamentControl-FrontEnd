@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
+import { HomeComponent } from '../home/home.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +17,8 @@ export class UserAdminComponent implements OnInit {
   user: UserModel;
   searchUser: any;
   userView: any;
+  userUpdate: any;
+  isShownUser: boolean = true;
 
   constructor
     (
@@ -27,7 +30,8 @@ export class UserAdminComponent implements OnInit {
     _CargarScripts.Carga(["script"]);
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.getUsers();
   }
 
@@ -65,10 +69,12 @@ export class UserAdminComponent implements OnInit {
     this.userRest.getUser(id).subscribe({
       next: (res: any) => {
         this.userView = res.user;
+        this.userUpdate = res.user
       },
-      error: (err) => alert(err.error.message)
+      error: (err) => {alert(err.error.message)}
     })
   }
+
 
   deleteUser(id: string) 
   {
@@ -106,6 +112,36 @@ export class UserAdminComponent implements OnInit {
         Swal.fire('User Not Deleted', '', 'info')
       }
     })
+  }
+
+  updateUser()
+  {
+    this.userUpdate.password = undefined;
+    this.userRest.updateUser(this.userUpdate._id, this.userView).subscribe({
+
+      next: (res:any)=> 
+      {
+        Swal.fire({
+          icon:'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.getUsers();
+      },
+      error: (err)=>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
+    })
+  }
+
+  back()
+  {
+    window.location.reload();
   }
 
 }
