@@ -16,9 +16,6 @@ const routes: Routes = [
 
   //RUTAS DE ADMINISTRADOR//
   {path: 'admin/home', component: HomeComponent},
-  {path: 'admin/user', component: UserAdminComponent},
-  {path: 'admin/tournament', component: TournamentsAdminComponent},
-  {path: 'admin/teams', component: TeamsAdminComponent},
 
   //RUTAS DE USUARIO//
   {path: 'client/home', component: HomeClientComponent},
