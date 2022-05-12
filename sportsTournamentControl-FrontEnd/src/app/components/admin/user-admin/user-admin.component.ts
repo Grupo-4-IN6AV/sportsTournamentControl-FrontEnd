@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
+import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
-import { HomeComponent } from '../home/home.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -116,7 +116,7 @@ export class UserAdminComponent implements OnInit {
   updateUser()
   {
     this.userUpdate.password = undefined;
-    this.userRest.updateUser(this.userUpdate._id, this.userView).subscribe({
+    this.userRest.updateUser(this.userUpdate._id, this.userUpdate).subscribe({
 
       next: (res:any)=> 
       {
@@ -141,11 +141,6 @@ export class UserAdminComponent implements OnInit {
   back()
   {
     window.location.reload();
-  }
-
-  updateProfile()
-  {
-
   }
 
 }

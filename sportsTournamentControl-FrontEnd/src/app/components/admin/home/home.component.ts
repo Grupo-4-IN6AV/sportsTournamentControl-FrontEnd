@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
+import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit
 {
   token : any;
   role : any;
+  userUpdate: any;
   isShownUser: boolean = false;
   isShownTournaments: boolean = false ;
   isShownTeams: boolean = false;
@@ -26,7 +29,7 @@ export class HomeComponent implements OnInit
   (
     private _CargarScripts:CargarScriptsService,
     private userRest : UserRestService,
-    private router: Router
+    private userAdminRest: UserAdminService,
   )
   {
     _CargarScripts.Carga(["home-component"])
@@ -136,5 +139,4 @@ export class HomeComponent implements OnInit
     this.notShow = false;
     this.isShownSettings = true;
   }
-
 }

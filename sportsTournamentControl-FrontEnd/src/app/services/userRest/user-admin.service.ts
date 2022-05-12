@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserRestService } from './user-rest.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,5 +43,10 @@ export class UserAdminService {
   updateUser(id:string, params:{})
   {
     return this.http.put(environment.baseUrl + 'user/updateUser/' + id, params, {headers: this.httpOptions});
+  }
+
+  updateAccount(id:string, params:{})
+  {
+    return this.http.put(environment.baseUrl + 'user/update/' + id, params, {headers: this.httpOptions});
   }
 }

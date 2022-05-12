@@ -1,0 +1,35 @@
+<div class="mt-5 wrapper">
+    <div class="title">
+        <i class="fa fa-user-circle" aria-hidden="true">
+        </i>  Your Profile
+    </div>
+    <form (ngSubmit)="updateUser()" *ngIf="userUpdate" autocomplete="off" class="form">
+       <div class="inputfield">
+          <label>Name</label>
+          <input [(ngModel)]="userUpdate.name" name="name" autocomplete="off" type="text" class="input">
+       </div>  
+        <div class="inputfield">
+          <label>Surname</label>
+          <input [(ngModel)]="userUpdate.surname" name="surname" autocomplete="off" type="text" class="input">
+       </div>  
+       <div class="inputfield">
+          <label>Username</label>
+          <input [(ngModel)]="userUpdate.username" name="username" autocomplete="off" type="text" class="input">
+       </div>  
+      <div class="inputfield">
+          <label>Email</label>
+          <input [(ngModel)]="userUpdate.email" name="email" autocomplete="off" type="text" class="input">
+       </div> 
+      <div class="inputfield">
+          <label>Phone</label>
+          <input [(ngModel)]="userUpdate.phone" name="phone" autocomplete="off" type="text" class="input">
+       </div> 
+       <div class="mt-5 modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+            aria-hidden="true"></i> Update User
+        </button>
+      </div>
+    </form>
+</div>	
