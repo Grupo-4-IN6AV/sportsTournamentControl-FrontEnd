@@ -18,7 +18,6 @@ export class UserAdminComponent implements OnInit {
   searchUser: any;
   userView: any;
   userUpdate: any;
-  isShownUser: boolean = true;
 
   constructor
     (
@@ -142,6 +141,11 @@ export class UserAdminComponent implements OnInit {
   back()
   {
     window.location.reload();
+  }
+
+  updateProfile()
+  {
+
   }
 
 }
