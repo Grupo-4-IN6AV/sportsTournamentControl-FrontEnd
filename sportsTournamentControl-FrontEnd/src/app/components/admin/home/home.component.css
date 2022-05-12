@@ -68,6 +68,7 @@ body
 	margin-left: 6px;
 	border-radius: 48px 0 0 48px;
 	padding: 4px;
+	cursor: pointer;
 }
 #sidebar .side-menu li.active {
 	background: #18191A;
@@ -95,7 +96,7 @@ body
 	box-shadow: 20px -20px 0 #18191A;
 	z-index: -1;
 }
-#sidebar .side-menu li a {
+#sidebar .side-menu li button {
 	width: 100%;
 	height: 100%;
 	background: #242526;
@@ -106,21 +107,23 @@ body
 	color: #FBFBFB;
 	white-space: nowrap;
 	overflow-x: hidden;
+	border: none;
+	cursor: pointer;
 }
-#sidebar .side-menu.top li.active a {
+#sidebar .side-menu.top li.active button {
 	color: #3C91E6;
 }
-#sidebar.hide .side-menu li a {
+#sidebar.hide .side-menu li button {
 	width: calc(48px - (4px * 2));
 	transition: width .3s ease;
 }
-#sidebar .side-menu li a.logout {
+#sidebar .side-menu li button.logout {
 	color: #DB504A;
 }
-#sidebar .side-menu.top li a:hover {
+#sidebar .side-menu.top li button:hover {
 	color: #3C91E6;
 }
-#sidebar .side-menu li a .bx {
+#sidebar .side-menu li button .bx {
 	min-width: calc(60px  - ((4px + 6px) * 2));
 	display: flex;
 	justify-content: center;
@@ -316,15 +319,13 @@ body
 	font-weight: 500;
 }
 
-
-
-
 #content main .box-info {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	grid-gap: 24px;
 	margin-top: 36px;
 }
+
 #content main .box-info li {
 	padding: 24px;
 	background: #242526;
@@ -332,6 +333,7 @@ body
 	display: flex;
 	align-items: center;
 	grid-gap: 24px;
+	cursor: pointer;
 }
 #content main .box-info li .bx {
 	width: 80px;

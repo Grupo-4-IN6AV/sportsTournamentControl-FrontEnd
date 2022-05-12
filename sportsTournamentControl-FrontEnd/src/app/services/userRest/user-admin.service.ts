@@ -38,4 +38,9 @@ export class UserAdminService {
   deleteUser(id:string){
     return this.http.delete(environment.baseUrl + 'user/deleteUser/' + id, {headers: this.httpOptions});
   }
+
+  updateUser(id:string, params:{})
+  {
+    return this.http.put(environment.baseUrl + 'user/updateUser/' + id, params, {headers: this.httpOptions});
+  }
 }

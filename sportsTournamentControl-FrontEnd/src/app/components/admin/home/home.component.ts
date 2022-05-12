@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit
   isShownTournaments: boolean = false ;
   isShownTeams: boolean = false ;
   notShow: boolean = true ;
+  disableUser: boolean = false;
+  disableTournament: boolean = false;
+  disableTeam: boolean = false;
+  disablePanel : boolean = false;
 
   constructor
   (
@@ -34,9 +38,9 @@ export class HomeComponent implements OnInit
 
   userShow()
   {
-    this.isShownUser = ! this.isShownUser;
+    this.isShownUser =! this.isShownUser;
     this.isShownTournaments == this.isShownTournaments;
-    this.isShownTeams == this.isShownTeams
+    this.isShownTeams == this.isShownTeams;
   }
 
   dontShowMain()
@@ -61,6 +65,54 @@ export class HomeComponent implements OnInit
   logOut()
   {
     localStorage.clear(); 
+  }
+
+  isDisableUser()
+  {
+    this.disablePanel = false;
+    this.disableUser = true;
+    this.disableTournament = false;
+    this.disableTeam = false
+    this.isShownUser = true;
+    this.isShownTournaments = false;
+    this.isShownTeams = false;
+    this.notShow = false;
+  }
+
+  isDisableTournament()
+  {
+    this.disablePanel = false;
+    this.disableUser = false;
+    this.disableTournament = true;
+    this.disableTeam = false;
+    this.isShownUser = false;
+    this.isShownTournaments = true;
+    this.isShownTeams = false;
+    this.notShow = false;
+  }
+
+  isDisableTeam()
+  {
+    this.disablePanel = false;
+    this.disableUser = false;
+    this.disableTournament = false;
+    this.disableTeam = true;
+    this.isShownUser = false;
+    this.isShownTournaments = false;
+    this.isShownTeams = true;
+    this.notShow = false;
+  }
+
+  isDisablePanel()
+  {
+    this.disablePanel = true;
+    this.disableUser = false;
+    this.disableTournament = false;
+    this.disableTeam = false;
+    this.isShownUser = false;
+    this.isShownTournaments = false;
+    this.isShownTeams = false;
+    this.notShow = true;
   }
 
 }
