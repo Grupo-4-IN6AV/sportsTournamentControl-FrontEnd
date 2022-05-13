@@ -26,7 +26,7 @@
                 </button>
             </li>
         </ul>
-        <ul class="side-menu">
+        <ul class="side-menu top">
             <li>
                 <button [disabled]="disableSettings" (click)="isDisableSettings();">
                     <i class='bx bxs-cog'></i>
@@ -91,19 +91,19 @@
         <!--CONTROL DE TORNEOS-->
         <main *ngIf="isShownTournaments">
             <div class="left binding">
-                <h1>Control Tournaments</h1>
+                <h1><i class="fa fa-trophy" aria-hidden="true"></i> Control Tournaments</h1>
             </div>
             <hr>
-            <app-tournaments-admin></app-tournaments-admin>
+            <app-tournament-client></app-tournament-client>
         </main>
 
         <!--CONTROL DE EQUIPOS-->
         <main *ngIf="isShownTeams">
             <div class="left binding">
-                <h1>Control Teams</h1>
+                <h1> <i class="fa fa-shield" aria-hidden="true"></i> Control Teams</h1>
             </div>
             <hr>
-            <app-teams-admin></app-teams-admin>
+            <app-teams-client></app-teams-client>
         </main>
 
         <!--SETTINGS PROFILES-->

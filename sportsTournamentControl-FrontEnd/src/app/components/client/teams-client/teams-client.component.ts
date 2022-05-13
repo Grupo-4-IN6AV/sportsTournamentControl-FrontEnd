@@ -1,29 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamRestService } from 'src/app/services/teamRest/team-rest.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 import { TeamModel } from 'src/app/models/team.model';
-import { TeamRestService } from 'src/app/services/teamRest/team-rest.service';
-import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-teams-admin',
-  templateUrl: './teams-admin.component.html',
-  styleUrls: ['./teams-admin.component.css']
+  selector: 'app-teams-client',
+  templateUrl: './teams-client.component.html',
+  styleUrls: ['./teams-client.component.css']
 })
-export class TeamsAdminComponent implements OnInit 
+export class TeamsClientComponent implements OnInit 
 {
+
   teams: any;
   team: TeamModel;
-  teamSearch: any;
   teamView: any;
   teamUpdate: any;
   searchTeam: any;
-  users: any;
 
   constructor
   (
     private teamRest : TeamRestService,
-    private userRest : UserAdminService,
     private _CargarScripts:CargarScriptsService,
   ) 
   {
@@ -33,28 +30,19 @@ export class TeamsAdminComponent implements OnInit
 
   ngOnInit(): void 
   {
-    this.getTeamsAdmin();
-    this.getUsers();
+    this.getTeamsUser();
   }
 
-  getTeamsAdmin()
+  getTeamsUser()
   {
-    this.teamRest.getTeams().subscribe({
+    this.teamRest.getTeamsUser().subscribe({
       next: (res: any) => this.teams = res.teamsExist,
       error: (err) => console.log(err)
     })
   }
 
-  getUsers(){
-    this.userRest.getUsers().subscribe({
-      next: (res:any)=> this.users = res.user,
-      error: (err)=> console.log(err)
-    })
-  }
-
-
-  saveTeamAdmin(addTeamForm: any) {
-    this.teamRest.saveTeamAdmin(this.team).subscribe
+  saveTeamUser(addTeamForm: any) {
+    this.teamRest.saveTeamUser(this.team).subscribe
       ({
         next: (res: any) => {
           Swal.fire
@@ -63,7 +51,7 @@ export class TeamsAdminComponent implements OnInit
               title: res.message,
               confirmButtonColor: '#28B463'
             });
-          this.getTeamsAdmin();
+          this.getTeamsUser();
           addTeamForm.reset();
         },
         error: (err: any) => {
@@ -77,7 +65,8 @@ export class TeamsAdminComponent implements OnInit
       })
   }
 
-  getTeam(id: string) {
+  getTeam(id: string) 
+  {
     this.teamRest.getTeam(id).subscribe({
       next: (res: any) => {
         this.teamView = res.team;
@@ -87,7 +76,31 @@ export class TeamsAdminComponent implements OnInit
     })
   }
 
-  deleteTeam(id: string) 
+  updateTeam()
+  {
+    this.teamRest.updateTeamUser(this.teamUpdate._id, this.teamUpdate).subscribe({
+
+      next: (res:any)=> 
+      {
+        Swal.fire({
+          icon:'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.getTeamsUser();
+      },
+      error: (err)=>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
+    })
+  }
+
+  deleteTeamUser(id: string) 
   {
     Swal.fire({
       title: 'Do you want to delete this Team?',
@@ -96,9 +109,8 @@ export class TeamsAdminComponent implements OnInit
       confirmButtonText: 'Delete',
       denyButtonText: `Don't delete`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.teamRest.deleteTeam(id).subscribe({
+        this.teamRest.deleteTeamUser(id).subscribe({
           next: (res: any) => {
             Swal.fire({
               title: res.message + ' ' + res.deleteTeam.name,
@@ -107,7 +119,7 @@ export class TeamsAdminComponent implements OnInit
               showConfirmButton: false,
               timer: 2000
             });
-            this.getTeamsAdmin();
+            this.getTeamsUser();
           },
           error: (err) => Swal.fire({
             title: err.error.message,
@@ -116,7 +128,6 @@ export class TeamsAdminComponent implements OnInit
             timer: 3000
           })
         })
-        this.getUsers();
       } else if (result.isDenied) 
       {
         Swal.fire('Team Not Deleted', '', 'info')
@@ -129,27 +140,4 @@ export class TeamsAdminComponent implements OnInit
     window.location.reload();
   }
 
-  updateTeam()
-  {
-    this.teamRest.updateTeam(this.teamUpdate._id, this.teamUpdate).subscribe({
-
-      next: (res:any)=> 
-      {
-        Swal.fire({
-          icon:'success',
-          title: res.message,
-          confirmButtonColor: '#28B463'
-        });
-        this.getTeamsAdmin();
-      },
-      error: (err)=>
-      {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.message || err.error,
-          confirmButtonColor: '#E74C3C'
-        });
-      },
-    })
-  }
 }

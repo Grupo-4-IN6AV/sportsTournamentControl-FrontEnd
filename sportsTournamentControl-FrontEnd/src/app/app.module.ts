@@ -16,6 +16,10 @@ import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.
 import { SearchUserPipe } from './pipes/search-user.pipe';
 import { HomeClientComponent } from './components/client/home-client/home-client.component';
 import { UserClientComponent } from './components/client/user-client/user-client.component';
+import { SearchTeamPipe } from './pipes/search-team.pipe';
+import { TeamsClientComponent } from './components/client/teams-client/teams-client.component';
+import { TournamentClientComponent } from './components/client/tournament-client/tournament-client.component';
+import { SearchTournamentPipe } from './pipes/search-tournament.pipe';
 
 @NgModule({
   declarations: 
@@ -32,6 +36,11 @@ import { UserClientComponent } from './components/client/user-client/user-client
     SearchUserPipe,
     HomeClientComponent,
     UserClientComponent,
+    SearchUserPipe,
+    SearchTeamPipe,
+    TeamsClientComponent,
+    TournamentClientComponent,
+    SearchTournamentPipe
   ],
   imports: [
     BrowserModule,

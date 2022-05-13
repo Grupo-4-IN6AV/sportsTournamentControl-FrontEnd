@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
     
   }
 
-  login(){
-    console.log(this.user);
+  login()
+  {
     this.userRest.login(this.user).subscribe({
       next: (res:any)=>{
         localStorage.setItem('identity', JSON.stringify(res.already));

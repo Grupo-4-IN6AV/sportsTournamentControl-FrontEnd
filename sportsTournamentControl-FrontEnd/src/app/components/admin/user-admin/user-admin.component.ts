@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
-import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
+import { SearchUserPipe } from 'src/app/pipes/search-user.pipe';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -60,6 +60,7 @@ export class UserAdminComponent implements OnInit {
             title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
+          addUserForm.reset();
         },
       })
   }
