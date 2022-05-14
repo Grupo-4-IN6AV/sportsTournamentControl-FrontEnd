@@ -6,16 +6,15 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
-
+export class AdminGuard implements CanActivate {
+  
   constructor(
     private userRest: UserRestService,
     public router: Router
   ){}
 
   canActivate(){
-    if(this.userRest.getIdentity().role === 'CLIENT' ||
-       this.userRest.getIdentity().role === 'ADMIN'){
+    if(this.userRest.getIdentity().role === 'ADMIN'){
       return true; //next()
     }else{
       this.router.navigateByUrl('login');
