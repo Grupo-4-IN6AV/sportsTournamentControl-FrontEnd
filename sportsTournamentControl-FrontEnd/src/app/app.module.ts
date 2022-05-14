@@ -20,6 +20,8 @@ import { SearchTeamPipe } from './pipes/search-team.pipe';
 import { TeamsClientComponent } from './components/client/teams-client/teams-client.component';
 import { TournamentClientComponent } from './components/client/tournament-client/tournament-client.component';
 import { SearchTournamentPipe } from './pipes/search-tournament.pipe';
+import { MatchesClientComponent } from './components/client/matches-client/matches-client.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: 
@@ -40,13 +42,15 @@ import { SearchTournamentPipe } from './pipes/search-tournament.pipe';
     SearchTeamPipe,
     TeamsClientComponent,
     TournamentClientComponent,
-    SearchTournamentPipe
+    SearchTournamentPipe,
+    MatchesClientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

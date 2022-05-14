@@ -1,103 +1,164 @@
 <!-- DESPLIEGA LA BÚSQUEDA -->
 <div class="form-input mt-5">
-    <input [(ngModel)]="searchTournament" placeholder="Search...">
-    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+  <input [(ngModel)]="searchTournament" placeholder="Search...">
+  <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 </div>
 
 <!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
 <div class="text-center mt-2 mb-2">
-    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#addTournament">
-        <i class="fa fa-trophy" aria-hidden="true"></i> Add Tournament</button>
-    <button (click)="back()" type="button" class="btn btn-primary m-3">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
+  <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#addTournament">
+    <i class="fa fa-trophy" aria-hidden="true"></i> Add Tournament</button>
+  <button (click)="back()" type="button" class="btn btn-primary m-3">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
 </div>
 <hr>
 
 
 <!--CARDS DE TOURNAMENTS-->
-<div>
-    <div class="container">
-        <div class="products-container">
-            <div *ngFor="let tournament of tournaments | searchTournamentPipe:searchTournament" class="product"
-                data-name="p-1">
-                <h5 class="card-title">{{tournament.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
-                <button (click)="getTournament(tournament._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTournament"
-                    class="btn btn-warning m-2" aria-controls="offcanvasExample">
-                    <i class="fa fa-pencil" aria-hidden="true">
-                    </i> Update
-                </button>
-                <button (click)="deleteTournament(tournament._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i>
-                    Delete</button>
-            </div>
-        </div>
+<div *ngIf="notShow">
+  <div class="container">
+    <div class="products-container">
+      <div *ngFor="let tournament of tournaments | searchTournamentPipe:searchTournament" class="product"
+        data-name="p-1">
+        <h5 class="card-title">{{tournament.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
+        <button (click)="getTournament(tournament._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+          data-bs-target="#updateTournament" class="btn btn-warning m-2" aria-controls="offcanvasExample">
+          <i class="fa fa-pencil" aria-hidden="true">
+          </i> Update
+        </button>
+        <button (click)="deleteTournament(tournament._id)" class="btn btn-danger"> <i class="fa fa-trash"
+            aria-hidden="true"></i>
+          Delete</button>
+        <button (click)="tableTournament(tournament._id); shownTable(); showCards(); getTournament(tournament._id)"
+          class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
+          <i class="fa fa-shield" aria-hidden="true"></i> View Teams</button>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
+          <i class="fa fa-calendar" aria-hidden="true"></i> View Journeys</button>
+          <button (click)="grafic(tournament._id); getTournament(tournament._id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> View Graphic</button>
+      </div>
     </div>
+  </div>
 </div>
 
 
 <!-- Modal Save Tournament -->
 <div class="modal fade" id="addTournament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-shield" aria-hidden="true"></i>
-                    Add Tournament:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-shield" aria-hidden="true"></i>
+          Add Tournament:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
-                <form #addTournamentForm="ngForm">
-                    <div class="mb-3">
-                        <label for="nameTeam" class="form-label">Name</label>
-                        <input [(ngModel)]="tournament.name" name="name" type="text" class="form-control" id="nameTeam" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="countryTeam" class="form-label">Description</label>
-                        <input [(ngModel)]="tournament.description" name="description" type="text" class="form-control" id="countryTeam">
-                    </div>
-                </form>
-            </div>
-            <div class=" modal-footer justify-content-center">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
-                <button (click)="saveTournamentUser(addTournamentForm)" type="submit" class="btn btn-success"
-                    data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Tournament
-                </button>
-            </div>
-        </div>
+        <form #addTournamentForm="ngForm">
+          <div class="mb-3">
+            <label for="nameTeam" class="form-label">Name</label>
+            <input [(ngModel)]="tournament.name" name="name" type="text" class="form-control" id="nameTeam"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="countryTeam" class="form-label">Description</label>
+            <input [(ngModel)]="tournament.description" name="description" type="text" class="form-control"
+              id="countryTeam">
+          </div>
+        </form>
+      </div>
+      <div class=" modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+        <button (click)="saveTournamentUser(addTournamentForm)" type="submit" class="btn btn-success"
+          data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Tournament
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal UPDATE User -->
 <div class="modal fade" id="updateTournament" tabindex="-1" aria-labelledby="updateTournament" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
-            Update Tournament:</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-  
-          <form (ngSubmit)="updateTournament()" *ngIf="tournamentUpdate">
-            <div class="mb-3">
-              <label for="nameUpdate" class="form-label">Name</label>
-              <input [(ngModel)]="tournamentUpdate.name" name="name" type="text" class="form-control" id="nameUpdate"
-                aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="surnameUpdate" class="form-label">Description</label>
-              <input [(ngModel)]="tournamentUpdate.description" name="description" type="text" class="form-control" id="surnameUpdate">
-            </div>
-            <div class=" modal-footer justify-content-center">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
-              <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
-                  aria-hidden="true"></i> Update Tournament
-              </button>
-            </div>
-          </form>
-        </div>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+          Update Tournament:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="updateTournament()" *ngIf="tournamentUpdate">
+          <div class="mb-3">
+            <label for="nameUpdate" class="form-label">Name</label>
+            <input [(ngModel)]="tournamentUpdate.name" name="name" type="text" class="form-control" id="nameUpdate"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="surnameUpdate" class="form-label">Description</label>
+            <input [(ngModel)]="tournamentUpdate.description" name="description" type="text" class="form-control"
+              id="surnameUpdate">
+          </div>
+          <div class=" modal-footer justify-content-center">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                aria-hidden="true"></i> Update Tournament
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="isShownTable">
+  <div *ngIf="viewTournament">
+    <br>
+    <h2 id="nameTournament">{{viewTournament.name}}</h2>
+    <br>
+  </div>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Team</th>
+        <th scope="col">M</th>
+        <th scope="col">W</th>
+        <th scope="col">T</th>
+        <th scope="col">L</th>
+        <th scope="col">PG</th>
+        <th scope="col">AG</th>
+        <th scope="col">DG</th>
+        <th scope="col">Pts.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teams of tournamentTable" class="table-light">
+        <td>{{tournamentTable.indexOf(teams)+1}}</td>
+        <td>{{teams.team.name}}</td>
+        <td>{{teams.playedMatches}}</td>
+        <td>{{teams.wonMatches}}</td>
+        <td>{{teams.tiedMatches}}</td>
+        <td>{{teams.lostMatches}}</td>
+        <td>{{teams.proGoals}}</td>
+        <td>{{teams.againstGoals}}</td>
+        <td>{{teams.differenceGoals}}</td>
+        <td>{{teams.teamPoints}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button (click)="shownTable();showCards()" type="button" class="btn btn-primary m-3">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Tournaments</button>
+  </div>
+</div>
+
+
+
+<div width="400" height="400">
+  <canvas id="canvas">{{myChart}}</canvas>
+  <button (click)="ngOnDestroy()" type="button" class="btn btn-primary m-3">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Tournaments</button>
+</div>

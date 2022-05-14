@@ -30,7 +30,7 @@
         </button>
         <button (click)="deleteUser(user._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i>
           Delete</button>
-        <button (click)="getUser(user._id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <button (click)="getUser(user._id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewUser"
           class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i> View</button>
       </div>
     </div>
@@ -39,62 +39,58 @@
 
 
 <!-- MODAL SHOW USER -->
-<div *ngIf="userView" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="contenedor">
-          <div class="contenedor-perfil">
-            <div class="descripcion">
-              <div class="count-container">
+<div *ngIf="userView">
+  <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="viewUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="descripcion">
+            <div class="count-container">
+              <div class="box">
+                <h3>Name:</h3>
+              </div>
 
-                <div class="box">
-                  <h3>Name:</h3>
-                </div>
+              <div class="box">
+                <p>{{userView.name}}</p>
+              </div>
 
-                <div class="box">
-                  <p>{{userView.name}}</p>
-                </div>
+              <div class="box">
+                <h3>Username:</h3>
+              </div>
 
-                <div class="box">
-                  <h3>Username:</h3>
-                </div>
+              <div class="box">
+                <p>{{userView.surname}}</p>
+              </div>
 
-                <div class="box">
-                  <p>{{userView.surname}}</p>
-                </div>
+              <div class="box">
+                <h3>Email:</h3>
+              </div>
 
-                <div class="box">
-                  <h3>Email:</h3>
-                </div>
+              <div class="box">
+                <p>{{userView.email}}</p>
+              </div>
 
-                <div class="box">
-                  <p>{{userView.email}}</p>
-                </div>
+              <div class="box">
+                <h3>Phone:</h3>
+              </div>
 
-                <div class="box">
-                  <h3>Phone:</h3>
-                </div>
+              <div class="box">
+                <p>{{userView.phone}}</p>
+              </div>
 
-                <div class="box">
-                  <p>{{userView.phone}}</p>
-                </div>
+              <div class="box">
+                <h3>Role:</h3>
+              </div>
 
-                <div class="box">
-                  <h3>Role:</h3>
-                </div>
-
-                <div class="box">
-                  <p>{{userView.role}}</p>
-                </div>
+              <div class="box">
+                <p>{{userView.role}}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

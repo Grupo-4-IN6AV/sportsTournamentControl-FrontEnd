@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TournamentRestService } from 'src/app/services/tournamentRest/tournament-rest.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
-import { TeamModel } from 'src/app/models/team.model';
 import Swal from 'sweetalert2';
 import { TournamentModel } from 'src/app/models/tournament.model';
+import { Chart } from 'chart.js';
+
 
 @Component({
   selector: 'app-tournament-client',
   templateUrl: './tournament-client.component.html',
   styleUrls: ['./tournament-client.component.css']
 })
-export class TournamentClientComponent implements OnInit 
+export class TournamentClientComponent implements OnInit, OnDestroy
 {
 
   tournaments: any;
   tournament: TournamentModel;
   tournamentView: any;
+  viewTournament: any;
+  resetValue: any;
+  tournamentTable: any;
+  tournamentGrafic: any;
   tournamentUpdate: any;
   searchTournament: any;
+  isShownTable: boolean = false;
+  notShow: boolean = true ;
+  chart: any
+  myChart : any = Chart;
+
 
   constructor
   (
@@ -47,6 +57,7 @@ export class TournamentClientComponent implements OnInit
     this.tournamentRest.getTournament(id).subscribe({
       next: (res: any) => {
         this.tournamentUpdate = res.tournament;
+        this.viewTournament = res.tournament
       },
       error: (err) => {alert(err.error.message)}
     })
@@ -137,8 +148,64 @@ export class TournamentClientComponent implements OnInit
     })
   }
 
+
+  tableTournament(id : string)
+  {
+    this.tournamentRest.tableTournament(id).subscribe({
+      next: (res: any) => 
+      {
+        this.tournamentTable = res.teamsData
+      },
+      error: (err) => {console.log(err)}
+    })
+    this.tournamentTable = this.resetValue
+  }
+
+  shownTable()
+  {
+    this.isShownTable =! this.isShownTable;
+  }
+
+  showCards()
+  {
+    this.notShow = ! this.notShow;
+  }
+
   back()
   {
     window.location.reload();
   }
+
+  grafic(id : string)
+  {
+    this.tournamentRest.tableTournament(id).subscribe({
+      next: (res: any) => 
+      {
+        this.tournamentGrafic = res.teamsData;
+        const setDataSets = []
+
+        for (var key=0; key < this.tournamentGrafic.length; key ++)
+        {
+          var data =  this.tournamentGrafic[key];
+          setDataSets.push({label:data.team.name, data:[data.teamPoints]});
+        }
+
+        this.chart = new Chart('canvas', 
+        {
+          type: 'bar',
+          data:
+          {
+              labels: [this.viewTournament.name],
+              datasets: setDataSets,
+          }
+        });
+      },
+      error: (err) => {console.log(err)}
+    })
+    this.tournamentGrafic = this.resetValue
+  }
+
+  ngOnDestroy() {if (this.chart) {this.chart.destroy();}}
+  
+
 }

@@ -1,0 +1,44 @@
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div class="form-input mt-5">
+    <input [(ngModel)]="searchTournament" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+<!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
+<div class="text-center mt-2 mb-2">
+    <button (click)="back()" type="button" class="btn btn-primary m-3">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
+</div>
+<hr>
+
+
+<!--CARDS DE TOURNAMENTS-->
+<div *ngIf="notShow">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let tournament of tournaments | searchTournamentPipe:searchTournament" class="product"
+                data-name="p-1">
+                <h5 class="card-title">{{tournament.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
+                <button (click)="shownTable(); showCards(); getTeamsUser(); getTournament(tournament._id)" class=" btn btn-success ms-2">
+                    <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isShownTable">
+    <div *ngIf="acordeonTeams" class="container">
+        <div class="products-container">
+            <div *ngFor="let teams of acordeonTeams" class="product"
+                data-name="p-1">
+                <h5 class="card-title">{{teams.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{teams.country}}</h6>
+                <p class="card-text">{{ teams.description }}</p>
+                <button name="team" (click)="addTeamTournament(teams._id);"  class=" btn btn-success ms-2">
+                    <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
+            </div>
+        </div>
+    </div>
+</div>
