@@ -9,16 +9,18 @@ import { UserAdminComponent } from './components/admin/user-admin/user-admin.com
 import { TournamentsAdminComponent } from './components/admin/tournaments-admin/tournaments-admin.component';
 import { TeamsAdminComponent } from './components/admin/teams-admin/teams-admin.component';
 import { HomeClientComponent } from './components/client/home-client/home-client.component';
+import { UserGuard } from './guards/user.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
  /*1 solo uso */ {path: '', component: LandingPageComponent}, //RUTA POR DEFAULT | VISTA PRINCIPAL
   {path: 'landingPage', component: LandingPageComponent}, //RUTA NORMAL 1+
 
   //RUTAS DE ADMINISTRADOR//
-  {path: 'admin/home', component: HomeComponent},
+  {path: 'admin/home', canActivate: [AdminGuard] ,component: HomeComponent},
 
   //RUTAS DE USUARIO//
-  {path: 'client/home', component: HomeClientComponent},
+  {path: 'client/home', canActivate: [UserGuard] ,component: HomeClientComponent},
 
   //RUTAS CUALQUIER//
   {path: 'login', component: LoginComponent}, //RUTA NORMAL
