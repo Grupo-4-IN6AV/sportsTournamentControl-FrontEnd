@@ -17,6 +17,7 @@ export class HomeClientComponent implements OnInit
   isShownTournaments: boolean = false ;
   isShownTeams: boolean = false;
   isShownSettings: boolean = false;
+  isShownMatches: boolean = false;
   notShow: boolean = true ;
   disableUser: boolean = false;
   disableTournament: boolean = false;
@@ -46,6 +47,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments == this.isShownTournaments;
     this.isShownTeams == this.isShownTeams;
     this.isShownSettings == this.isShownSettings;
+    this.isShownMatches == this.isShownMatches;
   }
 
   dontShowMain()
@@ -59,11 +61,22 @@ export class HomeClientComponent implements OnInit
     this.isShownUser == this.isShownUser;
     this.isShownTeams == this.isShownTeams
     this.isShownSettings == this.isShownSettings;
+    this.isShownMatches == this.isShownMatches;
   }
 
   teamsShow()
   {
     this.isShownTeams = ! this.isShownTeams;
+    this.isShownUser == this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments
+    this.isShownSettings == this.isShownSettings;
+    this.isShownMatches == this.isShownMatches;
+  }
+
+  matchesShow()
+  {
+    this.isShownMatches =! this.isShownMatches;
+    this.isShownTeams == this.isShownTeams;
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
     this.isShownSettings == this.isShownSettings;
@@ -85,6 +98,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
   }
 
   isDisableTournament()
@@ -98,6 +112,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
   }
 
   isDisableTeam()
@@ -111,6 +126,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = true;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
   }
 
   isDisablePanel()
@@ -124,6 +140,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = true;
     this.isShownSettings = false;
+    this.isShownMatches = false;
   }
 
   isDisableSettings()
@@ -137,6 +154,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = true;
+    this.isShownMatches = false;
   }
 
 }

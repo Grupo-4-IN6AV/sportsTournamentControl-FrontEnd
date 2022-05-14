@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
-import { SearchUserPipe } from 'src/app/pipes/search-user.pipe';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,6 +31,7 @@ export class UserAdminComponent implements OnInit {
   ngOnInit(): void 
   {
     this.getUsers();
+    this.userView = true;
   }
 
   getUsers() {

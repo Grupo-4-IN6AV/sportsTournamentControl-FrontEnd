@@ -23,8 +23,8 @@
         <h5 class="card-title">{{team.name}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{team.country}}</h6>
         <p name="category" class="card-text">{{team.user.username}}</p>
-        <button (click)="getTeam(team._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTeam"
-          class="btn btn-warning m-2" aria-controls="offcanvasExample">
+        <button (click)="getTeam(team._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+          data-bs-target="#updateTeam" class="btn btn-warning m-2" aria-controls="offcanvasExample">
           <i class="fa fa-pencil" aria-hidden="true">
           </i> Update
         </button>
@@ -85,55 +85,52 @@
 
 
 <!-- MODAL SHOW USER -->
-<div *ngIf="teamView" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="contenedor">
-          <div class="contenedor-perfil">
-            <div class="descripcion">
-              <div class="count-container">
+<div *ngIf="viewTeam">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="descripcion">
+            <div class="count-container">
 
-                <div class="box">
-                  <h3>Name:</h3>
-                </div>
-
-                <div class="box">
-                  <p>{{teamView.name}}</p>
-                </div>
-
-                <div class="box">
-                  <h3>Country:</h3>
-                </div>
-
-                <div class="box">
-                  <p>{{teamView.country}}</p>
-                </div>
-
-                <div class="box">
-                  <h3>Description:</h3>
-                </div>
-
-                <div class="box">
-                  <p>{{teamView.description}}</p>
-                </div>
-
-                <div class="box">
-                  <h3>User:</h3>
-                </div>
-
-                <div class="box">
-                  <p>{{teamView.user.username}}</p>
-                </div>
-
+              <div class="box">
+                <h3>Name:</h3>
               </div>
+
+              <div class="box">
+                <p>{{viewTeam.name}}</p>
+              </div>
+
+              <div class="box">
+                <h3>Country:</h3>
+              </div>
+
+              <div class="box">
+                <p>{{viewTeam.country}}</p>
+              </div>
+
+              <div class="box">
+                <h3>Description:</h3>
+              </div>
+
+              <div class="box">
+                <p>{{viewTeam.description}}</p>
+              </div>
+
+              <div class="box">
+                <h3>User:</h3>
+              </div>
+
+              <div class="box">
+                <p>{{viewTeam.user.username}}</p>
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
@@ -163,7 +160,8 @@
           </div>
           <div class="mb-3">
             <label for="usernameUpdate" class="form-label">Description</label>
-            <input [(ngModel)]="teamUpdate.description" name="username" type="text" class="form-control" id="usernameUpdate">
+            <input [(ngModel)]="teamUpdate.description" name="username" type="text" class="form-control"
+              id="usernameUpdate">
           </div>
           <div class=" modal-footer justify-content-center">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">

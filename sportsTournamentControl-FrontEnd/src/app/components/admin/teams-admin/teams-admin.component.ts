@@ -19,6 +19,7 @@ export class TeamsAdminComponent implements OnInit
   teamUpdate: any;
   searchTeam: any;
   users: any;
+  viewTeam: any;
 
   constructor
   (
@@ -45,7 +46,8 @@ export class TeamsAdminComponent implements OnInit
     })
   }
 
-  getUsers(){
+  getUsers()
+  {
     this.userRest.getUsers().subscribe({
       next: (res:any)=> this.users = res.user,
       error: (err)=> console.log(err)
@@ -80,7 +82,7 @@ export class TeamsAdminComponent implements OnInit
   getTeam(id: string) {
     this.teamRest.getTeam(id).subscribe({
       next: (res: any) => {
-        this.teamView = res.team;
+        this.viewTeam = res.team;
         this.teamUpdate = res.team;
       },
       error: (err) => {alert(err.error.message)}

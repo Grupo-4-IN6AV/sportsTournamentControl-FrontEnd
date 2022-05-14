@@ -48,4 +48,15 @@ export class TournamentRestService
     return this.http.delete(environment.baseUrl + 'tournament/deleteTournament/' + id , {headers: this.httpOptions});
   }
 
+  addTeamTournament(id : string, params:{})
+  {
+    console.log(params);
+    return this.http.post(environment.baseUrl + 'tournament/addTeamTournament/' +id, params,{headers: this.httpOptions});
+  }
+
+  tableTournament(id : string)
+  {
+    return this.http.get(environment.baseUrl + 'tournament/tableTournament/' + id , {headers: this.httpOptions});
+  }
+
 }
