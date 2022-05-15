@@ -35,7 +35,7 @@
           <i class="fa fa-shield" aria-hidden="true"></i> View Teams</button>
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
           <i class="fa fa-calendar" aria-hidden="true"></i> View Journeys</button>
-          <button (click)="grafic(tournament._id); getTournament(tournament._id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
+          <button (click)="grafic(tournament._id); getTournament(tournament._id); showGrafic(); showCards();" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" class=" btn btn-secondary ms-2">
             <i class="fa fa-bar-chart" aria-hidden="true"></i> View Graphic</button>
       </div>
     </div>
@@ -157,8 +157,10 @@
 
 
 
-<div width="400" height="400">
+<div *ngIf="shownGrafic" width="400" height="400">
+  <br>
+  <h2 id="nameTournament">{{viewTournament.name}}</h2><br>
   <canvas id="canvas">{{myChart}}</canvas>
-  <button (click)="ngOnDestroy()" type="button" class="btn btn-primary m-3">
+  <button (click)="ngOnDestroy(); showCards(); showGrafic();" type="button" class="btn btn-primary m-3">
     <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Tournaments</button>
 </div>

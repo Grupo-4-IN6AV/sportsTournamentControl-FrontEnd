@@ -27,6 +27,7 @@ export class TournamentClientComponent implements OnInit, OnDestroy
   notShow: boolean = true ;
   chart: any
   myChart : any = Chart;
+  shownGrafic: boolean = false;
 
 
   constructor
@@ -68,6 +69,7 @@ export class TournamentClientComponent implements OnInit, OnDestroy
     this.tournamentRest.saveTournamentUser(this.tournament).subscribe
       ({
         next: (res: any) => {
+
           Swal.fire
             ({
               icon: 'success',
@@ -169,6 +171,11 @@ export class TournamentClientComponent implements OnInit, OnDestroy
   showCards()
   {
     this.notShow = ! this.notShow;
+  }
+  
+  showGrafic()
+  {
+    this.shownGrafic = ! this.shownGrafic;
   }
 
   back()

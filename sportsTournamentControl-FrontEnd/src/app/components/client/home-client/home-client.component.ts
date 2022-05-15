@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { Router } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeClientComponent implements OnInit
   isShownTeams: boolean = false;
   isShownSettings: boolean = false;
   isShownMatches: boolean = false;
+  isShownJourneys: boolean = false;
   notShow: boolean = true ;
   disableUser: boolean = false;
   disableTournament: boolean = false;
@@ -48,6 +50,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams == this.isShownTeams;
     this.isShownSettings == this.isShownSettings;
     this.isShownMatches == this.isShownMatches;
+    this.isShownJourneys == this.isShownJourneys;
   }
 
   dontShowMain()
@@ -62,6 +65,7 @@ export class HomeClientComponent implements OnInit
     this.isShownTeams == this.isShownTeams
     this.isShownSettings == this.isShownSettings;
     this.isShownMatches == this.isShownMatches;
+    this.isShownJourneys == this.isShownJourneys;
   }
 
   teamsShow()
@@ -71,11 +75,23 @@ export class HomeClientComponent implements OnInit
     this.isShownTournaments == this.isShownTournaments
     this.isShownSettings == this.isShownSettings;
     this.isShownMatches == this.isShownMatches;
+    this.isShownJourneys == this.isShownJourneys;
   }
 
   matchesShow()
   {
     this.isShownMatches =! this.isShownMatches;
+    this.isShownTeams == this.isShownTeams;
+    this.isShownUser == this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments
+    this.isShownSettings == this.isShownSettings;
+    this.isShownJourneys == this.isShownJourneys;
+  }
+
+  journeysShow()
+  {
+    this.isShownJourneys =! this.isShownJourneys;
+    this.isShownMatches == this.isShownMatches;
     this.isShownTeams == this.isShownTeams;
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
@@ -99,6 +115,7 @@ export class HomeClientComponent implements OnInit
     this.notShow = false;
     this.isShownSettings = false;
     this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableTournament()
@@ -113,6 +130,7 @@ export class HomeClientComponent implements OnInit
     this.notShow = false;
     this.isShownSettings = false;
     this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableTeam()
@@ -127,6 +145,7 @@ export class HomeClientComponent implements OnInit
     this.notShow = false;
     this.isShownSettings = false;
     this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisablePanel()
@@ -141,6 +160,7 @@ export class HomeClientComponent implements OnInit
     this.notShow = true;
     this.isShownSettings = false;
     this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableSettings()
@@ -155,6 +175,7 @@ export class HomeClientComponent implements OnInit
     this.notShow = false;
     this.isShownSettings = true;
     this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
 }

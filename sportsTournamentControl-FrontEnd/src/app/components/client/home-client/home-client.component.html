@@ -90,6 +90,12 @@
                             <h3>Matches</h3>
                         </span>
                     </li>
+                    <li (click)="journeysShow(); dontShowMain()">
+                        <i class='bx bx-calendar'></i>
+                        <span class="text">
+                            <h3>Journeys</h3>
+                        </span>
+                    </li>
                 </ul>
             </div>
         </main>
@@ -119,6 +125,15 @@
             </div>
             <hr>
             <app-matches-client></app-matches-client>
+        </main>
+
+        <!--CONTROL DE JORNADAS-->
+        <main *ngIf="isShownJourneys">
+            <div class="left binding">
+                <h1> <i class="fa fa-calendar" aria-hidden="true"></i> Control Journeys</h1>
+            </div>
+            <hr>
+            <app-journey-client></app-journey-client>
         </main>
 
         <!--SETTINGS PROFILES-->
