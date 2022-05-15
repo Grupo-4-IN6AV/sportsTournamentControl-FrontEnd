@@ -356,6 +356,12 @@ body
 	background: #FAE5D3 ;
 	color: #FD7238;
 }
+
+#content main .box-info li:nth-child(4) .bx {
+	background: #82E0AA ;
+	color: #1E8449;
+}
+
 #content main .box-info li .text h3 {
 	font-size: 24px;
 	font-weight: 600;
@@ -364,10 +370,6 @@ body
 #content main .box-info li .text p {
 	color: #FBFBFB;	
 }
-
-
-
-
 
 #content main .table-data {
 	display: flex;

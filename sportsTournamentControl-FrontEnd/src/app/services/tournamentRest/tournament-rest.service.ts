@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserRestService } from '../userRest/user-rest.service';
+import { retry } from 'rxjs';
 
 
 @Injectable({
@@ -57,6 +58,26 @@ export class TournamentRestService
   tableTournament(id : string)
   {
     return this.http.get(environment.baseUrl + 'tournament/tableTournament/' + id , {headers: this.httpOptions});
+  }
+
+  getJourney(id:string)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getJourney/' + id, {headers:this.httpOptions});
+  }
+
+  addMatchTournament(id:string, params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/addMatch/' +id, params, {headers:this.httpOptions});
+  }
+
+  getJourneyTournaments(id: string)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getJourneys/' + id, {headers: this.httpOptions});
+  }
+
+  getMatchesJourney(params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/getMatches', params, {headers: this.httpOptions});
   }
 
 }

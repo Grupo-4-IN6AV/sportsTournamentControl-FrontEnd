@@ -1,0 +1,150 @@
+<body id="body">
+    
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bx-football'></i>
+            <span class="text" style="margin-top: 2rem;">Control Tournaments</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <button [disabled]="disablePanel" (click)="isDisablePanel()">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Control Pane</span>
+                </button>
+            </li>
+            <li>
+                <button [disabled]="disableUser" (click)="isDisableUser()">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">Users</span>
+                </button>
+            </li>
+            <li>
+                <button [disabled]="disableTournament" (click)="isDisableTournament()">
+                    <i class='bx bxs-trophy'></i>
+                    <span class="text">Tournaments</span>
+                </button>
+            </li>
+            <li>
+                <button [disabled]="disableTeam" (click)="isDisableTeam()">
+                    <i class='bx bxs-shield'></i>
+                    <span class="text">Teams</span>
+                </button>
+            </li>
+        </ul>
+        <ul class="side-menu top">
+            <li>
+                <button [disabled]="disableSettings" (click)="isDisableSettings();">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </button>
+            </li>
+            <li>
+                <button (click)="logOut()" class="logout" routerLink="/login">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </button>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+
+            <a href="#" class="profile">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- VALIDAR LO QUE EL USUARIO ME MANDE -->
+        <main *ngIf="notShow">
+            <div>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>
+                            <i class='bx bxs-dashboard'></i>
+                            Control Administrator</h1>
+                        <hr>
+                    </div>
+                    <a href="#" class="btn-download">
+                        <i class='bx bxs-cloud-download'></i>
+                        <span class="text">Download PDF</span>
+                    </a>
+                </div>
+
+                <ul class="box-info">
+                    <li (click)="userShow(); dontShowMain()">
+                        <i class='bx bxs-group'></i>
+                        <span class="text">
+                            <h3>Users</h3>
+                        </span>
+                    </li>
+                    <li (click)="tournamentsShow(); dontShowMain()">
+                        <i class='bx bxs-trophy'></i>
+                        <span class="text">
+                            <h3>Tournaments</h3>
+                        </span>
+                    </li>
+                    <li (click)="teamsShow(); dontShowMain()">
+                        <i class='bx bxs-shield'></i>
+                        <span class="text">
+                            <h3>Teams</h3>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- CONTROL USUARIOS -->
+        <main *ngIf="isShownUser">
+            <div class="left binding color">
+                <h1>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    Control Users
+                </h1>
+            </div>
+            <hr>
+            <app-user-admin></app-user-admin>
+        </main>
+
+        <!--CONTROL DE TORNEOS-->
+        <main *ngIf="isShownTournaments">
+            <div class="left binding">
+                <h1>Control Tournaments</h1>
+            </div>
+            <hr>
+            <app-tournaments-admin></app-tournaments-admin>
+        </main>
+
+        <!--CONTROL DE EQUIPOS-->
+        <main *ngIf="isShownTeams">
+            <div class="left binding">
+                <h1>
+                    <i class="fa fa-shield" aria-hidden="true"></i>
+                    Control Teams
+                </h1>
+            </div>
+            <hr>
+            <app-teams-admin></app-teams-admin>
+        </main>
+
+
+        <!--SETTINGS ACCOUNT-->
+        <main *ngIf="isShownSettings">
+            <div class="left binding">
+                <h1><i class="fa fa-cogs" aria-hidden="true"></i>
+                     Profile Settings</h1>
+            </div>
+            <hr>
+            <app-user-client></app-user-client>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+</body>

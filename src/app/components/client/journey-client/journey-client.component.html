@@ -1,0 +1,28 @@
+<!--CARDS DE TOURNAMENTS-->
+<div *ngIf="notShow">
+  <div class="container">
+    <div class="products-container">
+      <div *ngFor="let tournament of tournaments" class="product" data-name="p-1">
+        <h5 class="card-title">{{tournament.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
+        <button (click)="getJourneysTornament(tournament._id); showCards()" class="btn btn-danger">
+          <i class="fa fa-shield" aria-hidden="true"></i> View Teams</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MUESTRA JORNADAS-->
+<div *ngIf="isShownCards">
+  <div *ngIf="journeys" class="container">
+    <div class="products-container">
+      <h1>HOLA MUNDO</h1>
+      <div *ngFor="let journey of journeys" class="product" data-name="p-1">
+        <h1>HOLA MUNDO</h1>
+        <h5 style="color: #fff" class="card-title">{{"journey.name"}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
