@@ -25,6 +25,7 @@ export class JourneyClientComponent implements OnInit
   matchesJourney : any;
   teams : any;
   journeyId : any;
+  matches: any;
 
   constructor
   (
@@ -138,6 +139,43 @@ export class JourneyClientComponent implements OnInit
     })
   }
 
+
+  
+  deleteJourney(id:string)
+  {
+    let tournament = this.idTournament;
+    let data = {tournament};
+    Swal.fire({
+      title: 'Do you want to delete this Journey?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tournamentRest.deleteJourney(id, data).subscribe({
+          next: (res: any) => {
+            Swal.fire({
+              title: 'Matches of the journey deleted',
+              icon: 'success',
+              position: 'center',
+              showConfirmButton: false,
+              timer: 2000
+            });
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message,
+            icon: 'error',
+            position: 'center',
+            timer: 3000
+          })
+        })
+      } else if (result.isDenied) 
+      {
+        Swal.fire('Journey Not Deleted', '', 'info')
+      }
+    })
+  }
 
   back()
   {

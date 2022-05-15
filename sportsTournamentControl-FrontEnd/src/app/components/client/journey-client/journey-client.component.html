@@ -36,7 +36,10 @@
                 <h5 class="card-title">{{journey.name}}</h5>
                 <button (click)="getJourney(journey._id)" data-bs-toggle="modal" class=" btn btn-success ms-2"
                     data-bs-target="#addResult">
-                    <i class="fa fa-futbol-o" aria-hidden="true"></i> Add Results
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Results
+                </button>
+                <button (click)="deleteJourney(journey._id)" class=" btn btn-danger ms-2">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Delete Journey
                 </button>
                 <button  class=" btn btn-secondary ms-2">
                     <i class="fa fa-eye" aria-hidden="true"></i> View Results
