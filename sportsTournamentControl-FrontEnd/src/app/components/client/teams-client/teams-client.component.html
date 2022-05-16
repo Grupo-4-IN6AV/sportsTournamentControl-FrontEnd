@@ -1,0 +1,114 @@
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div class="form-input mt-5">
+    <input [(ngModel)]="searchTeam" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+  </div>
+  
+  <!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
+  <div class="text-center mt-2 mb-2">
+    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#addTeam">
+      <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
+    <button (click)="back()" type="button" class="btn btn-primary m-3">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
+  </div>
+  <hr>
+  
+  
+  <!--CARDS DE TEAMS-->
+  <div>
+    <div class="container">
+      <div class="products-container">
+        <div *ngFor="let team of teams | searchTeamPipe:searchTeam" class="product" data-name="p-1">
+          <h5 class="card-title">{{team.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{team.country}}</h6>
+          <p  class="card-text">{{team.description}}</p>
+          <button (click)="getTeam(team._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTeam"
+            class="btn btn-warning m-2" aria-controls="offcanvasExample">
+            <i class="fa fa-pencil" aria-hidden="true">
+            </i> Update
+          </button>
+          <button (click)="deleteTeamUser(team._id)" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i>
+            Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Save Team -->
+<div class="modal fade" id="addTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-shield" aria-hidden="true"></i>
+          Add Team:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form #addTeamForm="ngForm">
+          <div class="mb-3">
+            <label for="nameTeam" class="form-label">Name</label>
+            <input [(ngModel)]="team.name" name="name" type="text" class="form-control" id="nameTeam"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="countryTeam" class="form-label">Country</label>
+            <input [(ngModel)]="team.country" name="country" type="text" class="form-control" id="countryTeam">
+          </div>
+          <div class="mb-3">
+            <label for="descriptionTeam" class="form-label">Description</label>
+            <input [(ngModel)]="team.description" name="description" type="text" class="form-control"
+              id="descriptionTeam">
+          </div>
+        </form>
+      </div>
+      <div class=" modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+        <button (click)="saveTeamUser(addTeamForm)" type="submit" class="btn btn-success" data-bs-dismiss="modal"><i
+            class="fa fa-floppy-o" aria-hidden="true"></i> Save Team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal UPDATE User -->
+<div class="modal fade" id="updateTeam" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+          Update Team:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="updateTeam()" *ngIf="teamUpdate">
+          <div class="mb-3">
+            <label for="nameUpdate" class="form-label">Name</label>
+            <input [(ngModel)]="teamUpdate.name" name="name" type="text" class="form-control" id="nameUpdate"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="surnameUpdate" class="form-label">Country</label>
+            <input [(ngModel)]="teamUpdate.country" name="country" type="text" class="form-control" id="surnameUpdate">
+          </div>
+          <div class="mb-3">
+            <label for="usernameUpdate" class="form-label">Description</label>
+            <input [(ngModel)]="teamUpdate.description" name="username" type="text" class="form-control" id="usernameUpdate">
+          </div>
+          <div class=" modal-footer justify-content-center">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                aria-hidden="true"></i> Update Team
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

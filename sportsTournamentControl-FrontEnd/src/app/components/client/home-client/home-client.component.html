@@ -1,0 +1,151 @@
+<body id="body">
+    
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bx-football'></i>
+            <span class="text" style="margin-top: 2rem;">Control Tournaments</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <button [disabled]="disablePanel" (click)="isDisablePanel()">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Control Pane</span>
+                </button>
+            </li>
+            <li>
+                <button [disabled]="disableTournament" (click)="isDisableTournament()">
+                    <i class='bx bxs-trophy'></i>
+                    <span class="text">Tournaments</span>
+                </button>
+            </li>
+            <li>
+                <button [disabled]="disableTeam" (click)="isDisableTeam()">
+                    <i class='bx bxs-shield'></i>
+                    <span class="text">Teams</span>
+                </button>
+            </li>
+        </ul>
+        <ul class="side-menu top">
+            <li>
+                <button [disabled]="disableSettings" (click)="isDisableSettings();">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </button>
+            </li>
+            <li>
+                <button (click)="logOut()" class="logout" routerLink="/login">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </button>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+
+            <a href="#" class="profile">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- VALIDAR LO QUE EL USUARIO ME MANDE -->
+        <main *ngIf="notShow">
+            <div>
+                <div class="head-title">
+                    <div class="left">
+                        <h1>
+                            <i class='bx bxs-dashboard'></i>
+                            Control Client</h1>
+                        <hr>
+                    </div>
+                    <a href="#" class="btn-download">
+                        <i class='bx bxs-cloud-download'></i>
+                        <span class="text">Download PDF</span>
+                    </a>
+                </div>
+
+                <ul class="box-info">
+                        <li (click)="tournamentsShow(); dontShowMain()">
+                        <i class='bx bxs-trophy'></i>
+                        <span class="text">
+                            <h3>Tournaments</h3>
+                        </span>
+                    </li>
+                    <li (click)="teamsShow(); dontShowMain()">
+                        <i class='bx bxs-shield'></i>
+                        <span class="text">
+                            <h3>Teams</h3>
+                        </span>
+                    </li>
+                    <li (click)="matchesShow(); dontShowMain()">
+                        <i class='bx bx-football'></i>
+                        <span class="text">
+                            <h3>Matches</h3>
+                        </span>
+                    </li>
+                    <li (click)="journeysShow(); dontShowMain()">
+                        <i class='bx bx-calendar'></i>
+                        <span class="text">
+                            <h3>Journeys</h3>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+
+        <!--CONTROL DE TORNEOS-->
+        <main *ngIf="isShownTournaments">
+            <div class="left binding">
+                <h1><i class="fa fa-trophy" aria-hidden="true"></i> Control Tournaments</h1>
+            </div>
+            <hr>
+            <app-tournament-client></app-tournament-client>
+        </main>
+
+        <!--CONTROL DE EQUIPOS-->
+        <main *ngIf="isShownTeams">
+            <div class="left binding">
+                <h1> <i class="fa fa-shield" aria-hidden="true"></i> Control Teams</h1>
+            </div>
+            <hr>
+            <app-teams-client></app-teams-client>
+        </main>
+
+        <!--CONTROL DE PARTIDOS-->
+        <main *ngIf="isShownMatches">
+            <div class="left binding">
+                <h1> <i class="fa fa-futbol-o" aria-hidden="true"></i> Control Matches</h1>
+            </div>
+            <hr>
+            <app-matches-client></app-matches-client>
+        </main>
+
+        <!--CONTROL DE JORNADAS-->
+        <main *ngIf="isShownJourneys">
+            <div class="left binding">
+                <h1> <i class="fa fa-calendar" aria-hidden="true"></i> Control Journeys</h1>
+            </div>
+            <hr>
+            <app-journey-client></app-journey-client>
+        </main>
+
+        <!--SETTINGS PROFILES-->
+        <main *ngIf="isShownSettings">
+            <div class="left binding">
+                <h1><i class="fa fa-cogs" aria-hidden="true"></i>
+                     Profile Settings</h1>
+            </div>
+            <hr>
+            <app-user-client></app-user-client>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+</body>
