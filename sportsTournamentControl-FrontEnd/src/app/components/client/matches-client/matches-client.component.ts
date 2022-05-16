@@ -24,6 +24,7 @@ export class MatchesClientComponent implements OnInit
   acordeonTeams: any
   idTournament: any;
   idTeam: any;
+  searchTeam:any;
 
   constructor
   (

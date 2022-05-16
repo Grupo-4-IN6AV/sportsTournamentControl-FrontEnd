@@ -1,6 +1,12 @@
 <!-- DESPLIEGA LA BÚSQUEDA -->
-<div class="form-input mt-5">
+<div *ngIf="notShow" class="form-input mt-5">
     <input [(ngModel)]="searchTournament" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="isShownTable" class="form-input mt-5">
+    <input [(ngModel)]="searchTeam" placeholder="Search...">
     <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 </div>
 
@@ -31,7 +37,7 @@
 <div *ngIf="isShownTable">
     <div *ngIf="acordeonTeams" class="container">
         <div class="products-container">
-            <div *ngFor="let teams of acordeonTeams" class="product"
+            <div *ngFor="let teams of acordeonTeams | searchTeamPipe:searchTeam" class="product"
                 data-name="p-1">
                 <h5 class="card-title">{{teams.name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{teams.country}}</h6>

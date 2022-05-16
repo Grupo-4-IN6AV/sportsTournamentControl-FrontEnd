@@ -23,6 +23,7 @@ import { SearchTournamentPipe } from './pipes/search-tournament.pipe';
 import { MatchesClientComponent } from './components/client/matches-client/matches-client.component';
 import { NgChartsModule } from 'ng2-charts';
 import { JourneyClientComponent } from './components/client/journey-client/journey-client.component';
+import Swal from 'sweetalert2';
 
 @NgModule({
   declarations: 
