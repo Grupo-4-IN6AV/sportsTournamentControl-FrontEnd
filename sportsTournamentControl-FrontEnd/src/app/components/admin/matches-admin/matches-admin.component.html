@@ -1,6 +1,11 @@
 <!-- DESPLIEGA LA BÚSQUEDA -->
-<div class="form-input mt-5">
+<div *ngIf="notShow" class="form-input mt-5">
     <input [(ngModel)]="searchTournament" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+<div *ngIf="teamUser" class="form-input mt-5">
+    <input [(ngModel)]="searchTeam" placeholder="Search...">
     <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 </div>
 
@@ -21,7 +26,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
                 <p class="card-text"> {{ tournament.user.name}}</p>
                 <button (click)="shownTable(); showCards(); getTeamsAdmin(); 
-                    getTournamentsByAdminForUser(tournament.user)" class=" btn btn-success ms-2">
+                    getTournamentsByAdminForUser(tournament.user._id); getTournament(tournament._id);" class=" btn btn-success ms-2">
                     <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
             </div>
         </div>
@@ -29,18 +34,19 @@
 </div>
 
 <!--CARDS DE TOURNAMENTS-->
+<div>
 <div *ngIf="teamUser">
     <div class="container">
         <div class="products-container">
-            <div *ngFor="let team of teamUser | searchTournamentPipe:searchTournament" class="product"
+            <div *ngFor="let team of teamUser | searchTeamPipe:searchTeam" class="product"
                 data-name="p-1">
                 <h5 class="card-title">{{team.name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{team.description}}</h6>
                 <p class="card-text"> {{ team.user.name}}</p>
-                <button (click)="shownTable(); showCards(); getTeamsAdmin(); 
-                    getTournamentsByAdminForUser(tournament.user)" class=" btn btn-success ms-2">
+                <button (click)="addTeamTournamentAdmin(team._id, team.user._id)" class=" btn btn-success ms-2">
                     <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
             </div>
         </div>
     </div>
+</div>
 </div>

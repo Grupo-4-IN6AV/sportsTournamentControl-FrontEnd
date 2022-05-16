@@ -15,6 +15,7 @@ import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
 })
 export class MatchesAdminComponent implements OnInit {
 
+  searchTeam: any;
   tournaments: any;
   tournament: TournamentModel;
   resetValue: any;
@@ -58,7 +59,7 @@ export class MatchesAdminComponent implements OnInit {
 
   getTournamentsByAdminForUser(id: string){
     this.tournamentRest.getTournamentsbyAdminForUser(id).subscribe({
-      next: (res: any) => this.teamUser = res.tournaments,
+      next: (res: any) => this.teamUser = res.teams,
       error: (err) => console.log(err)
     })
   }
@@ -84,7 +85,7 @@ export class MatchesAdminComponent implements OnInit {
 
   getTournament(id: string) 
   {
-    this.tournamentRest.getTournament(id).subscribe({
+    this.tournamentRest.getTournamentAdmin(id).subscribe({
       next: (res: any) => {
         this.idTournament = res.tournament._id;
       },
@@ -92,11 +93,14 @@ export class MatchesAdminComponent implements OnInit {
     })
   }
 
-  addTeamTournamentAdmin(userId: string)
+  addTeamTournamentAdmin(teamID:string,userID: string)
   {
-    let teamId = this.teamValue;
-    let data = {teamId, userId}
-    this.tournamentRest.addTeamTournamentAdmin(this.idTournament, data).subscribe({
+    let tournamentId = this.idTournament;
+    let teamId = teamID;
+    let user = userID
+    let data = {teamId,user}
+    console.log(data)
+    this.tournamentRest.addTeamTournamentAdmin(tournamentId, data).subscribe({
       next: (res:any)=> 
       {
         Swal.fire({
