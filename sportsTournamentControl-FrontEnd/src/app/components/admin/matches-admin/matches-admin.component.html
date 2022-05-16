@@ -1,0 +1,46 @@
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div class="form-input mt-5">
+    <input [(ngModel)]="searchTournament" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+<!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
+<div class="text-center mt-2 mb-2">
+    <button (click)="back()" type="button" class="btn btn-primary m-3">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
+</div>
+<hr>
+
+<!--CARDS DE TOURNAMENTS-->
+<div *ngIf="notShow">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let tournament of tournaments | searchTournamentPipe:searchTournament" class="product"
+                data-name="p-1">
+                <h5 class="card-title">{{tournament.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
+                <p class="card-text"> {{ tournament.user.name}}</p>
+                <button (click)="shownTable(); showCards(); getTeamsAdmin(); 
+                    getTournamentsByAdminForUser(tournament.user)" class=" btn btn-success ms-2">
+                    <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--CARDS DE TOURNAMENTS-->
+<div *ngIf="teamUser">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let team of teamUser | searchTournamentPipe:searchTournament" class="product"
+                data-name="p-1">
+                <h5 class="card-title">{{team.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{team.description}}</h6>
+                <p class="card-text"> {{ team.user.name}}</p>
+                <button (click)="shownTable(); showCards(); getTeamsAdmin(); 
+                    getTournamentsByAdminForUser(tournament.user)" class=" btn btn-success ms-2">
+                    <i class="fa fa-shield" aria-hidden="true"></i> Add Team</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -362,11 +362,18 @@ body
 	color: #1E8449;
 }
 
+#content main .box-info li:nth-child(5) .bx {
+	background: #CFE8FF ;
+	color: #3C91E6;
+}
+
 #content main .box-info li .text h3 {
 	font-size: 24px;
 	font-weight: 600;
 	color: #FBFBFB;
 }
+
+
 #content main .box-info li .text p {
 	color: #FBFBFB;	
 }
