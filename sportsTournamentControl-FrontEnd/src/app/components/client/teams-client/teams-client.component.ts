@@ -57,7 +57,7 @@ export class TeamsClientComponent implements OnInit
         error: (err: any) => {
           Swal.fire({
             icon: 'error',
-            title: err.message || err.error,
+            title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
           addTeamForm.reset();
