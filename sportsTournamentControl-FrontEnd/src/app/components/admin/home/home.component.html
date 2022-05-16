@@ -97,6 +97,18 @@
                             <h3>Teams</h3>
                         </span>
                     </li>
+                    <li (click)="matchesShow(); dontShowMain()">
+                        <i class='bx bx-football'></i>
+                        <span class="text">
+                            <h3>Matches</h3>
+                        </span>
+                    </li>
+                    <li (click)="journeysShow(); dontShowMain()">
+                        <i class='bx bx-calendar'></i>
+                        <span class="text">
+                            <h3>Journeys</h3>
+                        </span>
+                    </li>
                 </ul>
             </div>
         </main>
@@ -134,6 +146,23 @@
             <app-teams-admin></app-teams-admin>
         </main>
 
+         <!--CONTROL DE PARTIDOS-->
+         <main *ngIf="isShownMatches">
+            <div class="left binding">
+                <h1> <i class="fa fa-futbol-o" aria-hidden="true"></i> Control Matches</h1>
+            </div>
+            <hr>
+            <app-matches-client></app-matches-client>
+        </main>
+
+        <!--CONTROL DE JORNADAS-->
+        <main *ngIf="isShownJourneys">
+            <div class="left binding">
+                <h1> <i class="fa fa-calendar" aria-hidden="true"></i> Control Journeys</h1>
+            </div>
+            <hr>
+            <app-journey-client></app-journey-client>
+        </main>
 
         <!--SETTINGS ACCOUNT-->
         <main *ngIf="isShownSettings">
