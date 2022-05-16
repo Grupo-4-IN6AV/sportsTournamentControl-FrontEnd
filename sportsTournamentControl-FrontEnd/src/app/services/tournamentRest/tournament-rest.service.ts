@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserRestService } from '../userRest/user-rest.service';
-import { retry } from 'rxjs';
 
 
 @Injectable({
