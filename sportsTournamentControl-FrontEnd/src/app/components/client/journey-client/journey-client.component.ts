@@ -10,60 +10,60 @@ import { CargarScriptsService } from 'src/app/cargar-scripts.service';
   templateUrl: './journey-client.component.html',
   styleUrls: ['./journey-client.component.css']
 })
-export class JourneyClientComponent implements OnInit 
-{
+export class JourneyClientComponent implements OnInit {
 
   tournaments: any;
   journey: JourneyModel;
   viewJourney: any
+  viewTournament: any;
   journeys: any;
   resetValue: any;
   searchTournament: any;
-  notShow: boolean = true ;
-  isShownJourneys : boolean = false;
+  notShow: boolean = true;
   idTournament: any;
-  matchesJourney : any;
-  teams : any;
-  journeyId : any;
+  isShownJourneys: boolean = false;
+  isShownTable: boolean = false;
+  matchesJourney: any;
+  teams: any;
+  journeyId: any;
   matches: any;
+  journeyView: any
 
   constructor
-  (
-    private tournamentRest : TournamentRestService,
-    private teamRest: TeamRestService,
-    private _CargarScripts:CargarScriptsService,
-  ) 
-  { 
+    (
+      private tournamentRest: TournamentRestService,
+      private teamRest: TeamRestService,
+      private _CargarScripts: CargarScriptsService,
+  ) {
     this.journey = new JourneyModel('', 0, '', 0,);
     _CargarScripts.Carga(["script"]);
   }
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.getTournamentsUser();
     this.getTeamsUser();
   }
 
-  getTournamentsUser()
-  {
+  getTournamentsUser() {
     this.tournamentRest.getTournamentsUser().subscribe({
       next: (res: any) => this.tournaments = res.tournaments,
       error: (err) => console.log(err)
     })
   }
 
-  showCards()
-  {
-    this.notShow = ! this.notShow;
+  showCards() {
+    this.notShow = !this.notShow;
   }
 
-  showJourneys()
-  {
-    this.isShownJourneys =! this.isShownJourneys;
+  showJourneys() {
+    this.isShownJourneys = !this.isShownJourneys;
   }
 
-  getJourneysTournament(id : string)
-  {
+  showTable() {
+    this.isShownTable = !this.isShownTable;
+  }
+
+  getJourneysTournament(id: string) {
     this.tournamentRest.getJourneyTournaments(id).subscribe({
       next: (res: any) => {
         this.journeys = res.journeys
@@ -72,35 +72,34 @@ export class JourneyClientComponent implements OnInit
     })
   }
 
-  getTournament(id : string)
-  {
+  getTournament(id: string) {
     this.tournamentRest.getTournament(id).subscribe({
       next: (res: any) => {
         this.idTournament = res.tournament._id;
+        this.viewTournament = res.tournament;
       },
       error: (err) => console.log(err)
     })
   }
 
-  getJourney(id:string)
-  {
+  getJourney(id: string) {
     this.tournamentRest.getJourney(id).subscribe({
-      next: (res:any) =>
-      {
+      next: (res: any) => {
         this.journeyId = res.journey._id
+        this.journeyView = res.journey
       },
       error: (err) => console.log(err)
     })
+    this.journeyView = this.resetValue;
   }
 
-  saveJourney(addJourneyForm: any)
-  {
+  saveJourney(addJourneyForm: any) {
     let tournament = this.idTournament;
     let localTeam = this.journey.localTeam;
     let visitingTeam = this.journey.visitingTeam;
     let localScore = this.journey.localScore;
     let visitingScore = this.journey.visitingScore;
-    let data = 
+    let data =
     {
       tournament,
       localTeam,
@@ -108,17 +107,15 @@ export class JourneyClientComponent implements OnInit
       visitingTeam,
       visitingScore
     }
-    console.log(data);
     this.tournamentRest.addMatchTournament(this.journeyId, data).subscribe({
-      next: (res:any) =>
-      {
+      next: (res: any) => {
         Swal.fire
-            ({
-              icon: 'success',
-              title: res.message,
-              confirmButtonColor: '#28B463'
-            });
-          addJourneyForm.reset();
+          ({
+            icon: 'success',
+            title: res.message,
+            confirmButtonColor: '#28B463'
+          });
+        addJourneyForm.reset();
       },
       error: (err: any) => {
         Swal.fire({
@@ -131,20 +128,23 @@ export class JourneyClientComponent implements OnInit
     })
   }
 
-  getTeamsUser()
-  {
+  getTeamsUser() {
     this.teamRest.getTeamsUser().subscribe({
       next: (res: any) => this.teams = res.teamsExist,
       error: (err) => console.log(err)
     })
   }
 
+  getMatches(id: string) {
+    this.tournamentRest.getMatches(id).subscribe({
+      next: (res: any) => this.matches = res.match,
+      error: (err) => console.log(err)
+    })
+  }
 
-  
-  deleteJourney(id:string)
-  {
+  deleteJourney(id: string) {
     let tournament = this.idTournament;
-    let data = {tournament};
+    let data = { tournament };
     Swal.fire({
       title: 'Do you want to delete this Journey?',
       showDenyButton: true,
@@ -170,15 +170,51 @@ export class JourneyClientComponent implements OnInit
             timer: 3000
           })
         })
-      } else if (result.isDenied) 
-      {
+      } else if (result.isDenied) {
         Swal.fire('Journey Not Deleted', '', 'info')
       }
     })
   }
 
-  back()
+  deleteMatch(id: string) 
   {
+    let journeyId = this.journeyId;
+    let matchId = id;
+    let tournament = this.idTournament;
+    let data = {matchId,tournament};
+    Swal.fire({
+      title: 'Do you want to delete this Journey?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tournamentRest.deleteMatch(journeyId, data).subscribe({
+          next: (res: any) => {
+            Swal.fire({
+              title: 'Matches of the journey deleted',
+              icon: 'success',
+              position: 'center',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            this.getMatches(journeyId);
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message,
+            icon: 'error',
+            position: 'center',
+            timer: 3000
+          })
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Journey Not Deleted', '', 'info')
+      }
+    })
+  }
+
+  back() {
     window.location.reload();
   }
 
