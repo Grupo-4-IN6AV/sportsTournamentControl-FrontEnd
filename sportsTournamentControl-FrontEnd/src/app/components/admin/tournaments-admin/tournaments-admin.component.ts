@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { TournamentModel } from 'src/app/models/tournament.model';
+import { CargarScriptsService } from 'src/app/cargar-scripts.service';
+import { TournamentRestService } from 'src/app/services/tournamentRest/tournament-rest.service';
+import { UserAdminService } from 'src/app/services/userRest/user-admin.service';
+import Swal from 'sweetalert2';
+import { Chart } from 'chart.js';
+ 
 
 @Component({
   selector: 'app-tournaments-admin',
@@ -7,9 +14,206 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TournamentsAdminComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  tournaments: any;
+  tournament: TournamentModel;
+  tournamentView: any;
+  viewTournament: any;
+  resetValue: any;
+  tournamentTable: any;
+  tournamentGrafic: any;
+  tournamentUpdate: any;
+  searchTournament: any;
+  isShownTable: boolean = false;
+  notShow: boolean = true ;
+  chart: any
+  myChart : any = Chart;
+  shownGrafic: boolean = false;
+  users: any;
+  
+  constructor(
+    private tournamentRest : TournamentRestService,
+    private userRest : UserAdminService,
+    private _CargarScripts:CargarScriptsService,
+  )
+  {
+    this.tournament = new TournamentModel('', '', '', '');
+    _CargarScripts.Carga(["script"]);
   }
 
+  ngOnInit(): void {
+    this.getTournamentsAdmin();
+    this.getUsers();
+  }
+
+  getUsers()
+  {
+    this.userRest.getUsers().subscribe({
+      next: (res:any)=> {this.users = res.user, console.log(this.users)},
+      error: (err)=> console.log(err)
+    })
+  }
+
+  getTournamentsAdmin()
+  {
+    this.tournamentRest.getTournamentsAdmin().subscribe({
+      next: (res: any) => this.tournaments = res.tournaments,
+      error: (err) => console.log(err)
+    })
+  }
+
+  getTournamentAdmin(id: string) 
+  {
+    this.tournamentRest.getTournamentAdmin(id).subscribe({
+      next: (res: any) => {
+        this.tournamentUpdate = res.tournament;
+        this.viewTournament = res.tournament
+      },
+      error: (err) => {alert(err.error.message)}
+    })
+  }
+
+  saveTournamentAdmin(addTournamentForm: any) {
+    this.tournamentRest.saveTournamentAdmin(this.tournament).subscribe
+      ({
+        next: (res: any) => {
+
+          Swal.fire
+            ({
+              icon: 'success',
+              title: res.message,
+              confirmButtonColor: '#28B463'
+            });
+          this.getTournamentsAdmin();
+          addTournamentForm.reset();
+        },
+        error: (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error.message || err.error,
+            confirmButtonColor: '#E74C3C'
+          });
+          addTournamentForm.reset();
+        },
+      })
+  }
+  updateTournamentAdmin()
+  {
+    this.tournamentRest.updateTournamentAdmin(this.tournamentUpdate._id, this.tournamentUpdate).subscribe({
+      next: (res:any)=> 
+      {
+        Swal.fire({
+          icon:'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.getTournamentsAdmin();
+      },
+      error: (err)=>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
+    })
+  }
+
+  deleteTournamentAdmin(id: string) 
+  {
+    Swal.fire({
+      title: 'Do you want to delete this Tournament?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tournamentRest.deleteTournamentAdmin(id).subscribe({
+          next: (res: any) => {
+            Swal.fire({
+              title: res.message + ' ' + res.deleteTournament.name,
+              icon: 'success',
+              position: 'center',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            this.getTournamentsAdmin();
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message,
+            icon: 'error',
+            position: 'center',
+            timer: 3000
+          })
+        })
+      } else if (result.isDenied) 
+      {
+        Swal.fire('Tournament Not Deleted', '', 'info')
+      }
+    })
+  }
+  
+  tableTournament(id : string)
+  {
+    this.tournamentRest.tableTournament(id).subscribe({
+      next: (res: any) => 
+      {
+        this.tournamentTable = res.teamsData
+      },
+      error: (err) => {console.log(err)}
+    })
+    this.tournamentTable = this.resetValue
+  }
+
+  shownTable()
+  {
+    this.isShownTable =! this.isShownTable;
+  }
+
+  showCards()
+  {
+    this.notShow = ! this.notShow;
+  }
+  
+  showGrafic()
+  {
+    this.shownGrafic = ! this.shownGrafic;
+  }
+
+  back()
+  {
+    window.location.reload();
+  }
+
+  grafic(id : string)
+  {
+    this.tournamentRest.tableTournament(id).subscribe({
+      next: (res: any) => 
+      {
+        this.tournamentGrafic = res.teamsData;
+        const setDataSets = []
+
+        for (var key=0; key < this.tournamentGrafic.length; key ++)
+        {
+          var data =  this.tournamentGrafic[key];
+          setDataSets.push({label:data.team.name, data:[data.teamPoints]});
+        }
+
+        this.chart = new Chart('canvas', 
+        {
+          type: 'bar',
+          data:
+          {
+              labels: [this.viewTournament.name],
+              datasets: setDataSets,
+          }
+        });
+      },
+      error: (err) => {console.log(err)}
+    })
+    this.tournamentGrafic = this.resetValue
+  }
+
+  ngOnDestroy() {if (this.chart) {this.chart.destroy();}}
 }
