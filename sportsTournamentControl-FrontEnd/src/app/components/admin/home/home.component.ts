@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit
     this.isShownTournaments == this.isShownTournaments;
     this.isShownTeams == this.isShownTeams;
     this.isShownSettings == this.isShownSettings;
+    this.isShownJourneys == this.isShownJourneys;
+    this.isShownMatches == this.isShownMatches;
   }
 
   dontShowMain()
@@ -62,6 +64,8 @@ export class HomeComponent implements OnInit
     this.isShownUser == this.isShownUser;
     this.isShownTeams == this.isShownTeams
     this.isShownSettings == this.isShownSettings;
+    this.isShownJourneys == this.isShownJourneys;
+    this.isShownMatches == this.isShownMatches;
   }
 
   teamsShow()
@@ -70,6 +74,8 @@ export class HomeComponent implements OnInit
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
     this.isShownSettings == this.isShownSettings;
+    this.isShownJourneys == this.isShownJourneys;
+    this.isShownMatches == this.isShownMatches;
   }
 
   matchesShow()
@@ -108,6 +114,8 @@ export class HomeComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableTournament()
@@ -121,6 +129,8 @@ export class HomeComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableTeam()
@@ -134,6 +144,8 @@ export class HomeComponent implements OnInit
     this.isShownTeams = true;
     this.notShow = false;
     this.isShownSettings = false;
+    this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisablePanel()
@@ -147,6 +159,8 @@ export class HomeComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = true;
     this.isShownSettings = false;
+    this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 
   isDisableSettings()
@@ -160,5 +174,7 @@ export class HomeComponent implements OnInit
     this.isShownTeams = false;
     this.notShow = false;
     this.isShownSettings = true;
+    this.isShownMatches = false;
+    this.isShownJourneys = false;
   }
 }
