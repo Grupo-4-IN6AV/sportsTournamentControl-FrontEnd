@@ -68,4 +68,9 @@ export class TeamRestService {
     return this.http.delete(environment.baseUrl + 'team/deleteTeam/' + id, {headers: this.httpOptions})
   }
 
+  getTeamsUserAdmin(id:string)
+  {
+    return this.http.get(environment.baseUrl + 'team/getTeamsJourneys/' + id, {headers: this.httpOptions})
+  }
+
 }

@@ -1,0 +1,153 @@
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div class="form-input mt-5">
+    <input [(ngModel)]="searchTournament" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+</div>
+
+<!-- DESPLIEGA EL BOTON AGREGAR USUARIO -->
+<div class="text-center mt-2 mb-2">
+    <button (click)="back()" type="button" class="btn btn-primary m-3">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </button>
+</div>
+<hr>
+
+
+<!--CARDS DE TOURNAMENTS-->
+<div *ngIf="notShow">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let tournament of tournaments | searchTournamentPipe:searchTournament" class="product"
+                data-name="p-1">
+                <h5 class="card-title">{{tournament.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6>
+                <p class="card-subtitle mb-2 text-muted">{{tournament.user.username}}</p>
+                <button
+                    (click)="showCards(); showJourneys(); getJourneysTournament(tournament._id);  getTournament(tournament._id)"
+                    class=" btn btn-success ms-2">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> View Journeys</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--CARDS DE JOURNEYS OF TOURNAMENT-->
+<div *ngIf="isShownJourneys">
+    <div *ngIf="journeys" class="container">
+        <div class="products-container">
+            <div *ngFor="let journey of journeys" class="product" data-name="p-1">
+                <h5 class="card-title">{{journey.name}}</h5>
+                <button (click)="getJourney(journey._id); getTeamsUser();" data-bs-toggle="modal" class=" btn btn-success ms-2"
+                    data-bs-target="#addResult">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Results
+                </button>
+                <button (click)="deleteJourney(journey._id)" class=" btn btn-danger ms-2">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Delete Matches
+                </button>
+                <button (click)="getJourney(journey._id); getMatches(journey._id); showTable(); showJourneys()" class=" btn btn-secondary ms-2">
+                    <i class="fa fa-eye" aria-hidden="true"></i> View Results
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--FORM DE AGREGAR RESULTADO-->
+
+<div *ngIf="isShownJourneys" class="modal fade" id="addResult" tabindex="-1" aria-labelledby="addResult"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-futbol-o" aria-hidden="true"></i>
+                    Add Result:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #addJourneyForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Team Local</label>
+                        <select [(ngModel)]="journey.localTeam" name="localTeam" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Team</option>
+                            <option *ngFor="let team of teams" value="{{ team._id }}">{{team.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="localScore" class="form-label">Local Score</label>
+                        <input min="0" [(ngModel)]="journey.localScore" name="localScore" type="number"
+                            class="form-control" id="localScore">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Team Visiting</label>
+                        <select [(ngModel)]="journey.visitingTeam" name="visitingTeam" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Team</option>
+                            <option *ngFor="let team of teams" value="{{ team._id }}">{{team.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="visitingScore" class="form-label">Visiting Score</label>
+                        <input min="0" [(ngModel)]="journey.visitingScore" name="visitingScore" type="number"
+                            class="form-control" id="visitingScore">
+                    </div>
+                </form>
+            </div>
+            <div class=" modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                <button (click)="saveJourney(addJourneyForm)" type="submit" class="btn btn-success"
+                    data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Result
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+<div *ngIf="isShownTable">
+    <div>
+        <br>
+        <h2 id="nameTournament"></h2>
+        <br>
+    </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <td align="center"  class="b"  colspan="6">{{viewTournament.name}}</td>
+            </tr>
+            <tr>
+                <td align="center" class="b"  colspan="6"><b>{{journeyView.name}}</b></td>
+            </tr>
+        </thead>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Local Team</th>
+                <th scope="col">Goals</th>
+                <th scope="col">VS</th>
+                <th scope="col">Visiting Team</th>
+                <th scope="col">Goals</th>
+                <th scope="col"></th>
+              </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let match of matches" class="table-light">
+                <td align="center">{{match.localTeam.name}}</td>
+                <td align="center">{{match.localScore}}</td>
+                <td class="bold" align="center">VS</td>
+                <td align="center">{{match.visitingTeam.name}}</td>
+                <td align="center">{{match.visitingScore}}</td>
+                <td align="center">
+                    <button (click)="deleteMatch(match._id)" class=" btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Delete Match
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button (click)="showJourneys(); showTable();" type="button" class="btn btn-primary m-3">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Tournaments</button>
+    </div>
+</div>
+</div>
