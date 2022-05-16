@@ -323,3 +323,14 @@ hr
 {
    color: #eeee;
 }
+
+.bold
+{
+   color: black;
+   font-weight: 750;  
+}
+
+th
+{
+   text-align: center;
+}

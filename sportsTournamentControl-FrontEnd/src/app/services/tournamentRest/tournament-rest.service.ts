@@ -85,4 +85,14 @@ export class TournamentRestService
     return this.http.post(environment.baseUrl + 'journey/deleteJorney/' +id, params, {headers:this.httpOptions});
   }
 
+  getMatches(id:string,)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getMatches/' +id, {headers:this.httpOptions});
+  }
+
+  deleteMatch(id:string, params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/deleteMatch/' +id, params, {headers:this.httpOptions});
+  }
+
 }
