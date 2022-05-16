@@ -121,5 +121,20 @@ export class TournamentRestService
   {
     return this.http.get(environment.baseUrl + 'tournament/getTournamentsByAdminForUser/' +id, {headers: this.httpOptions});
   }
+  getMatches(id:string,)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getMatches/' +id, {headers:this.httpOptions});
+  }
+
+  deleteMatch(id:string, params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/deleteMatch/' +id, params, {headers:this.httpOptions});
+  }
+
+  getMatchesAdmin(id:string,)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getMatchesAdmin/' +id, {headers:this.httpOptions});
+  }
+  
 
 }

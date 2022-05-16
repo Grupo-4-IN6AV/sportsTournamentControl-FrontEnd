@@ -23,6 +23,9 @@ import { SearchTournamentPipe } from './pipes/search-tournament.pipe';
 import { MatchesClientComponent } from './components/client/matches-client/matches-client.component';
 import { NgChartsModule } from 'ng2-charts';
 import { JourneyClientComponent } from './components/client/journey-client/journey-client.component';
+import Swal from 'sweetalert2';
+import { MatchesAdminComponent } from './components/admin/matches-admin/matches-admin.component';
+import { JourneyAdminComponent } from './components/admin/journey-admin/journey-admin.component';
 
 @NgModule({
   declarations: 
@@ -46,6 +49,8 @@ import { JourneyClientComponent } from './components/client/journey-client/journ
     SearchTournamentPipe,
     MatchesClientComponent,
     JourneyClientComponent,
+    MatchesAdminComponent,
+    JourneyAdminComponent,
   ],
   imports: [
     BrowserModule,
