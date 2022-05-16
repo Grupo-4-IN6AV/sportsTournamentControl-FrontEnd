@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit
   isShownTournaments: boolean = false ;
   isShownTeams: boolean = false;
   isShownSettings: boolean = false;
+  isShownMatches: boolean = false;
+  isShownJourneys: boolean = false;
   notShow: boolean = true ;
   disableUser: boolean = false;
   disableTournament: boolean = false;
@@ -65,6 +67,26 @@ export class HomeComponent implements OnInit
   teamsShow()
   {
     this.isShownTeams = ! this.isShownTeams;
+    this.isShownUser == this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments
+    this.isShownSettings == this.isShownSettings;
+  }
+
+  matchesShow()
+  {
+    this.isShownMatches =! this.isShownMatches;
+    this.isShownTeams == this.isShownTeams;
+    this.isShownUser == this.isShownUser;
+    this.isShownTournaments == this.isShownTournaments
+    this.isShownSettings == this.isShownSettings;
+    this.isShownJourneys == this.isShownJourneys;
+  }
+
+  journeysShow()
+  {
+    this.isShownJourneys =! this.isShownJourneys;
+    this.isShownMatches == this.isShownMatches;
+    this.isShownTeams == this.isShownTeams;
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
     this.isShownSettings == this.isShownSettings;

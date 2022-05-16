@@ -84,15 +84,42 @@ export class TournamentRestService
   {
     return this.http.post(environment.baseUrl + 'journey/deleteJorney/' +id, params, {headers:this.httpOptions});
   }
+  //ADMIN
 
-  getMatches(id:string,)
+  getTournamentsAdmin()
   {
-    return this.http.get(environment.baseUrl + 'journey/getMatches/' +id, {headers:this.httpOptions});
+    return this.http.get(environment.baseUrl + 'tournament/getTournamentsByAdmin', {headers: this.httpOptions});
   }
 
-  deleteMatch(id:string, params:{})
+  getTournamentAdmin(id : string)
   {
-    return this.http.post(environment.baseUrl + 'journey/deleteMatch/' +id, params, {headers:this.httpOptions});
+    return this.http.get(environment.baseUrl + 'tournament/getTournamentByAdmin/' + id, {headers : this.httpOptions});
+  }
+  saveTournamentAdmin(params:{})
+  {
+    return this.http.post(environment.baseUrl + 'tournament/createTournamentByAdmin', params,{headers: this.httpOptions});
+  }
+  updateTournamentAdmin(id : string, params:{})
+  {
+    return this.http.put(environment.baseUrl + 'tournament/updateTournamentByAdmin/' + id , params, {headers: this.httpOptions});
+  }
+  deleteTournamentAdmin(id : string)
+  {
+    return this.http.delete(environment.baseUrl + 'tournament/deleteTournamentByAdmin/' + id , {headers: this.httpOptions});
+  }
+  addTeamTournamentAdmin(id : string, params:{})
+  {
+    //console.log(params);
+    return this.http.post(environment.baseUrl + 'tournament/addTeamTournamentByAdmin/' +id, params,{headers: this.httpOptions});
+  }
+
+  getTournamentsbyAdmin()
+  {
+    return this.http.get(environment.baseUrl + 'tournament/getTournamentsByAdmin', {headers: this.httpOptions});
+  }
+  getTournamentsbyAdminForUser(id: string)
+  {
+    return this.http.get(environment.baseUrl + 'tournament/getTournamentsByAdminForUser/' +id, {headers: this.httpOptions});
   }
 
 }
