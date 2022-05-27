@@ -26,7 +26,7 @@ export class TournamentClientComponent implements OnInit, OnDestroy
   isShownTable: boolean = false;
   notShow: boolean = true ;
   chart: any
-  myChart : any = Chart;
+  myChart : any;
   shownGrafic: boolean = false;
 
 
@@ -170,12 +170,12 @@ export class TournamentClientComponent implements OnInit, OnDestroy
 
   showCards()
   {
-    this.notShow = ! this.notShow;
+    this.notShow =! this.notShow;
   }
   
   showGrafic()
   {
-    this.shownGrafic = ! this.shownGrafic;
+    this.shownGrafic =! this.shownGrafic;
   }
 
   back()

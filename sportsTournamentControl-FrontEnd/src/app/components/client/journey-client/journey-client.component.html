@@ -21,7 +21,7 @@
                 <h5 class="card-title">{{tournament.name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{tournament.description}}</h6><br>
                 <button
-                    (click)="showCards(); showJourneys(); getJourneysTournament(tournament._id);  getTournament(tournament._id)"
+                    (click)="showCards(); showJourneys(); getJourneysTournament(tournament._id);  getTournament(tournament._id); getTeamsUser(tournament._id)"
                     class=" btn btn-success ms-2">
                     <i class="fa fa-calendar" aria-hidden="true"></i> View Journeys</button>
             </div>
@@ -39,7 +39,7 @@
                     data-bs-target="#addResult">
                     <i class="fa fa-plus" aria-hidden="true"></i> Add Results
                 </button>
-                <button (click)="deleteJourney(journey._id)" class=" btn btn-danger ms-2">
+                <button  (click)="deleteJourney(journey._id)" class=" btn btn-danger ms-2">
                     <i class="fa fa-trash" aria-hidden="true"></i> Delete Matches
                 </button>
                 <button (click)="getJourney(journey._id); getMatches(journey._id); showTable(); showJourneys()" class=" btn btn-secondary ms-2">
@@ -68,7 +68,7 @@
                         <select [(ngModel)]="journey.localTeam" name="localTeam" class="form-select"
                             aria-label="Default select example">
                             <option disabled value="" selected>Choose a Team</option>
-                            <option *ngFor="let team of teams" value="{{ team._id }}">{{team.name}}</option>
+                            <option *ngFor="let team of teams" value="{{ team.team._id }}">{{team.team.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -81,7 +81,7 @@
                         <select [(ngModel)]="journey.visitingTeam" name="visitingTeam" class="form-select"
                             aria-label="Default select example">
                             <option disabled value="" selected>Choose a Team</option>
-                            <option *ngFor="let team of teams" value="{{ team._id }}">{{team.name}}</option>
+                            <option *ngFor="let team of teams" value="{{ team.team._id }}">{{team.team.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -138,7 +138,10 @@
                 <td align="center">{{match.visitingScore}}</td>
                 <td align="center">
                     <button (click)="deleteMatch(match._id)" class=" btn btn-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Delete Match
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button> 
+                    <button (click)="getMatch(match._id)" data-bs-toggle="modal" data-bs-target="#updateResult" class="ml-2 btn btn-warning">
+                        <i class="fa fa-edit" aria-hidden="true"></i>  
                     </button>
                 </td>
             </tr>
@@ -146,7 +149,60 @@
     </table>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button (click)="showJourneys(); showTable();" type="button" class="btn btn-primary m-3">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Tournaments</button>
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back Journeys</button>
     </div>
 </div>
+</div>
+
+
+<!--UPDATE MATCH JOURNEY-->
+<div  class="modal fade" id="updateResult" tabindex="-1" aria-labelledby="updateResult"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-futbol-o" aria-hidden="true"></i>
+                    Update Result:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="updateMatch()" *ngIf="match">
+                    <div class="mb-3">
+                        <label class="form-label">Team Local</label>
+                        <select [(ngModel)]="match.localTeam" name="localTeam" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="{{match.localTeam}}" selected>{{match.localTeam.name}}</option>
+            
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="localScore" class="form-label">Local Score</label>
+                        <input min="0" [(ngModel)]="match.localScore" name="localScore" type="number"
+                            class="form-control" id="localScore">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Team Visiting</label>
+                        <select [(ngModel)]="match.visitingTeam" name="visitingTeam" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="{{match.visitingTeam}}" selected>{{match.visitingTeam.name}}</option>
+                            
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="visitingScore" class="form-label">Visiting Score</label>
+                        <input min="0" [(ngModel)]="match.visitingScore" name="visitingScore" type="number"
+                            class="form-control" id="visitingScore">
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success"
+                            data-bs-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Result
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
 </div>

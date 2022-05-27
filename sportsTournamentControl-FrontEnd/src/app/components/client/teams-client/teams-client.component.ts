@@ -36,7 +36,7 @@ export class TeamsClientComponent implements OnInit
   getTeamsUser()
   {
     this.teamRest.getTeamsUser().subscribe({
-      next: (res: any) => this.teams = res.teamsExist,
+      next: (res: any) => {this.teams = res.teamsExist; console.log(this.teams)},
       error: (err) => console.log(err)
     })
   }

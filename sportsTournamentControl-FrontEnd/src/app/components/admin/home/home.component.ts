@@ -55,12 +55,12 @@ export class HomeComponent implements OnInit
 
   dontShowMain()
   {
-    this.notShow = ! this.notShow;
+    this.notShow =! this.notShow;
   }
 
   tournamentsShow()
   {
-    this.isShownTournaments = ! this.isShownTournaments;
+    this.isShownTournaments =! this.isShownTournaments;
     this.isShownUser == this.isShownUser;
     this.isShownTeams == this.isShownTeams
     this.isShownSettings == this.isShownSettings;
@@ -70,12 +70,13 @@ export class HomeComponent implements OnInit
 
   teamsShow()
   {
-    this.isShownTeams = ! this.isShownTeams;
+    this.isShownTeams =! this.isShownTeams;
     this.isShownUser == this.isShownUser;
     this.isShownTournaments == this.isShownTournaments
     this.isShownSettings == this.isShownSettings;
     this.isShownJourneys == this.isShownJourneys;
     this.isShownMatches == this.isShownMatches;
+    console.log(this.isShownTeams);
   }
 
   matchesShow()
@@ -101,6 +102,7 @@ export class HomeComponent implements OnInit
   logOut()
   {
     localStorage.clear(); 
+    window.location.reload();
   }
 
   isDisableUser()

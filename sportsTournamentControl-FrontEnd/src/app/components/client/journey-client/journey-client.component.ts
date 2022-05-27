@@ -27,7 +27,8 @@ export class JourneyClientComponent implements OnInit {
   teams: any;
   journeyId: any;
   matches: any;
-  journeyView: any
+  journeyView: any;
+  match: any;
 
   constructor
     (
@@ -41,7 +42,6 @@ export class JourneyClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTournamentsUser();
-    this.getTeamsUser();
   }
 
   getTournamentsUser() {
@@ -128,9 +128,9 @@ export class JourneyClientComponent implements OnInit {
     })
   }
 
-  getTeamsUser() {
-    this.teamRest.getTeamsUser().subscribe({
-      next: (res: any) => this.teams = res.teamsExist,
+  getTeamsUser(id:string) {
+    this.tournamentRest.getTeamTournament(id).subscribe({
+      next: (res: any) => {this.teams = res.teamsExist; console.log(this.teams)},
       error: (err) => console.log(err)
     })
   }
@@ -138,6 +138,17 @@ export class JourneyClientComponent implements OnInit {
   getMatches(id: string) {
     this.tournamentRest.getMatches(id).subscribe({
       next: (res: any) => this.matches = res.match,
+      error: (err) => console.log(err)
+    })
+  }
+
+  getMatch(match: string) 
+  {
+    let matchExist = { match };
+    console.log(match);
+    console.log(this.journeyId);
+    this.tournamentRest.getMatch(this.journeyId, matchExist).subscribe({
+      next: (res: any) => {this.match = res.match, console.log(this.match)},
       error: (err) => console.log(err)
     })
   }
@@ -211,6 +222,39 @@ export class JourneyClientComponent implements OnInit {
       } else if (result.isDenied) {
         Swal.fire('Journey Not Deleted', '', 'info')
       }
+    })
+  }
+
+  updateMatch()
+  {
+    let journeyId = this.journeyId;
+    let params = 
+    { 
+      matchId: this.match._id, 
+      tournament: this.idTournament,
+      localTeam: this.match.localTeam,
+      visitingTeam: this.match.visitingTeam,
+      localScore: this.match.localScore,
+      visitingScore: this.match.visitingScore
+    };
+    this.tournamentRest.updateMatch(this.journeyId, params).subscribe({
+      next: (res:any)=> 
+      {
+        Swal.fire({
+          icon:'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.getMatches(journeyId);
+      },
+      error: (err)=>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
     })
   }
 

@@ -318,3 +318,14 @@ hr
 {
    padding-top: 15px;
 }
+
+.bold
+{
+   color: black;
+   font-weight: 750;  
+}
+
+th
+{
+   text-align: center;
+}

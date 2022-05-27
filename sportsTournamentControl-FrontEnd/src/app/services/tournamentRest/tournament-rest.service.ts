@@ -83,6 +83,12 @@ export class TournamentRestService
   {
     return this.http.post(environment.baseUrl + 'journey/deleteJorney/' +id, params, {headers:this.httpOptions});
   }
+
+  getTeamTournament(id:string)
+  {
+    return this.http.get(environment.baseUrl + 'journey/getTeamsTournament/' +id, {headers:this.httpOptions});
+  }
+
   //ADMIN
 
   getTournamentsAdmin()
@@ -120,9 +126,15 @@ export class TournamentRestService
   {
     return this.http.get(environment.baseUrl + 'tournament/getTournamentsByAdminForUser/' +id, {headers: this.httpOptions});
   }
+
   getMatches(id:string,)
   {
     return this.http.get(environment.baseUrl + 'journey/getMatches/' +id, {headers:this.httpOptions});
+  }
+
+  getMatch(id:string, params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/getMatch/' +id, params, {headers:this.httpOptions});
   }
 
   deleteMatch(id:string, params:{})
@@ -130,9 +142,14 @@ export class TournamentRestService
     return this.http.post(environment.baseUrl + 'journey/deleteMatch/' +id, params, {headers:this.httpOptions});
   }
 
-  getMatchesAdmin(id:string,)
+  getMatchesAdmin(id:string)
   {
     return this.http.get(environment.baseUrl + 'journey/getMatchesAdmin/' +id, {headers:this.httpOptions});
+  }
+
+  updateMatch(id:string, params:{})
+  {
+    return this.http.post(environment.baseUrl + 'journey/updateMatch/' +id, params, {headers:this.httpOptions});
   }
   
 

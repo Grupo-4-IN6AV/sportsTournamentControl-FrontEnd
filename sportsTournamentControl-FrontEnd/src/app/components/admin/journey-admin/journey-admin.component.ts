@@ -30,6 +30,7 @@ export class JourneyAdminComponent implements OnInit {
   journeyView: any
   matchesView: any;
   userTournament: any
+  match: any;
 
   constructor
     (
@@ -137,10 +138,9 @@ export class JourneyAdminComponent implements OnInit {
     })
   }
 
-  getTeamsUser() 
-  {
-    this.teamRest.getTeamsUserAdmin(this.userTournament).subscribe({
-      next: (res: any) => this.teams = res.teamsExist,
+  getTeamsUser(id:string) {
+    this.tournamentRest.getTeamTournament(id).subscribe({
+      next: (res: any) => {this.teams = res.teamsExist; console.log(this.teams)},
       error: (err) => console.log(err)
     })
   }
@@ -221,6 +221,50 @@ export class JourneyAdminComponent implements OnInit {
       } else if (result.isDenied) {
         Swal.fire('Journey Not Deleted', '', 'info')
       }
+    })
+  }
+
+  updateMatch()
+  {
+    let journeyId = this.journeyId;
+    let params = 
+    { 
+      matchId: this.match._id, 
+      tournament: this.idTournament,
+      localTeam: this.match.localTeam,
+      visitingTeam: this.match.visitingTeam,
+      localScore: this.match.localScore,
+      visitingScore: this.match.visitingScore
+    };
+    this.tournamentRest.updateMatch(this.journeyId, params).subscribe({
+      next: (res:any)=> 
+      {
+        Swal.fire({
+          icon:'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.getMatches(journeyId);
+      },
+      error: (err)=>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      },
+    })
+  }
+
+  getMatch(match: string) 
+  {
+    let matchExist = { match };
+    console.log(match);
+    console.log(this.journeyId);
+    this.tournamentRest.getMatch(this.journeyId, matchExist).subscribe({
+      next: (res: any) => {this.match = res.match, console.log(this.match)},
+      error: (err) => console.log(err)
     })
   }
 
